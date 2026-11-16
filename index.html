@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>GED NEXO Varginha — Premiação &amp; Reconhecimento de Empresas Regionais</title>
+<meta name="description" content="App do evento de Premiação e Reconhecimento de Empresas Regionais do GED NEXO Varginha. 18 de novembro, às 19h. Programação, inscrição e credencial digital.">
+<meta name="theme-color" content="#05080F">
+
+<!-- Preview ao compartilhar (WhatsApp, Instagram, etc.)
+     Depois de publicar na Vercel, troque og:image e og:url pelo endereço completo,
+     ex.: https://gednexo.vercel.app/convite.jpg — alguns apps só aceitam URL absoluta. -->
+<meta property="og:site_name" content="GED NEXO Varginha">
+<meta property="og:title" content="Premiação &amp; Reconhecimento de Empresas Regionais">
+<meta property="og:description" content="18 de novembro, às 19h — Sítio Matsumura. Celebrando conquistas, valorizando parceiros e fortalecendo o nosso negócio.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gednexo-evento.vercel.app/">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://gednexo-evento.vercel.app/og.jpg">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="420">
+<meta property="og:image:alt" content="Convite do evento de Premiação e Reconhecimento de Empresas Regionais do GED NEXO Varginha.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Premiação &amp; Reconhecimento de Empresas Regionais">
+<meta name="twitter:description" content="18 de novembro, às 19h — Sítio Matsumura, Varginha.">
+<meta name="twitter:image" content="https://gednexo-evento.vercel.app/og.jpg">
+
+<!-- Instalar na tela inicial -->
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GED NEXO">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%23080D1A'/%3E%3Cg fill='none' stroke='%2360A5FA' stroke-width='3.4'%3E%3Cpath d='M14 10h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z'/%3E%3Cpath d='M26 22h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   GED NEXO VARGINHA — App do evento
+   =========================================================== */
+:root{
+  --bg-950:#05080F; --bg-900:#080D1A; --bg-850:#0B1322; --bg-800:#101A2E;
+  --blue-200:#BFDBFE; --blue-300:#93C5FD; --blue-400:#60A5FA; --blue-500:#3B82F6; --blue-600:#2563EB;
+  --cyan-400:#22D3EE; --indigo-500:#6366F1;
+  --ink:#E9EEF8; --ink-soft:rgba(233,238,248,.70); --ink-mute:rgba(233,238,248,.46);
+  --glass:rgba(255,255,255,.045); --line:rgba(255,255,255,.10); --line-blue:rgba(96,165,250,.30);
+  --grad:linear-gradient(135deg,#93C5FD 0%,#60A5FA 30%,#3B82F6 62%,#6366F1 100%);
+  --grad-soft:linear-gradient(135deg,rgba(96,165,250,.18),rgba(99,102,241,.06));
+  --r-md:18px; --r-lg:24px;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --disp:"Space Grotesk","Inter",system-ui,sans-serif;
+  --rail:242px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;font-family:var(--sans);background:var(--bg-950);color:var(--ink);
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow:hidden;
+}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit}
+
+/* ---------------- ambient ---------------- */
+.bg-field{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:
+  radial-gradient(1100px 760px at 10% -8%, #14294F 0%, transparent 58%),
+  radial-gradient(900px 640px at 94% 4%, #112344 0%, transparent 56%),
+  radial-gradient(820px 820px at 46% 110%, #0D1C38 0%, transparent 60%),
+  linear-gradient(180deg,#080D1A 0%,#05080F 52%,#080D1A 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.4}
+.orb-a{width:52vw;height:52vw;min-width:320px;min-height:320px;top:-14%;left:-12%;
+  background:radial-gradient(circle,rgba(59,130,246,.5),transparent 68%);animation:drift 28s ease-in-out infinite}
+.orb-b{width:44vw;height:44vw;min-width:280px;min-height:280px;top:30%;right:-16%;
+  background:radial-gradient(circle,rgba(34,211,238,.3),transparent 68%);animation:drift 34s ease-in-out infinite reverse}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(5%,7%,0) scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.orb{animation:none}}
+
+/* ===========================================================
+   APP SHELL
+   =========================================================== */
+.app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column}
+.app-main{flex:1;display:flex;flex-direction:column;min-height:0;min-width:0}
+
+.app-bar{
+  flex-shrink:0;display:flex;align-items:center;gap:.8rem;
+  padding:calc(env(safe-area-inset-top,0px) + .8rem) clamp(1rem,4vw,1.6rem) .8rem;
+  background:rgba(8,13,26,.72);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+  border-bottom:1px solid var(--line);
+}
+.bar-brand{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.bar-brand svg{width:30px;height:30px;color:var(--blue-400)}
+.bar-brand .bt{display:flex;flex-direction:column;line-height:1}
+.bar-brand .b1{font-family:var(--disp);font-size:.94rem;font-weight:700;letter-spacing:.05em}
+.bar-brand .b2{font-size:.5rem;letter-spacing:.34em;color:var(--blue-400);margin-top:.22rem;font-weight:700}
+
+.app-title{flex:1;min-width:0;text-align:right}
+.app-title strong{display:block;font-family:var(--disp);font-size:.98rem;font-weight:700;letter-spacing:-.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-title span{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-400);font-weight:700;margin-top:.1rem}
+
+.icon-btn{width:40px;height:40px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;cursor:pointer;
+  background:var(--glass);border:1px solid var(--line);color:var(--ink);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:background .22s,border-color .22s;padding:0}
+.icon-btn:hover{background:rgba(255,255,255,.1);border-color:var(--line-blue)}
+.icon-btn svg{width:19px;height:19px}
+
+.app-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:clamp(1.1rem,4vw,1.7rem) clamp(1rem,4vw,1.6rem) 2.4rem}
+.app-inner{max-width:680px;margin-inline:auto}
+
+.view{display:none}
+.view.active{display:block;animation:viewIn .36s cubic-bezier(.2,.8,.3,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view.active{animation:none}}
+
+/* ---------------- tab bar (mobile) ---------------- */
+.tabbar{
+  flex-shrink:0;order:2;display:grid;grid-template-columns:repeat(4,1fr);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  background:rgba(8,13,26,.86);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  border-top:1px solid var(--line);
+}
+.rail-brand,.rail-foot{display:none}
+.tab{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.22rem;
+  background:none;border:0;cursor:pointer;color:var(--ink-mute);padding:.62rem .1rem calc(.62rem + 2px);
+  transition:color .24s;font-family:inherit;min-height:62px;
+}
+.tab svg{width:21px;height:21px;transition:transform .28s cubic-bezier(.2,.8,.3,1)}
+.tab span{font-size:.56rem;letter-spacing:.03em;font-weight:600;line-height:1}
+.tab:hover{color:var(--blue-200)}
+.tab[aria-selected="true"]{color:var(--blue-300)}
+.tab[aria-selected="true"] svg{transform:translateY(-1px) scale(1.08)}
+.tab[aria-selected="true"]::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:26px;height:2.5px;border-radius:0 0 3px 3px;background:var(--grad)}
+.tab .dot{position:absolute;top:9px;right:calc(50% - 18px);width:7px;height:7px;border-radius:50%;
+  background:#34D399;border:1.5px solid #0A1020;display:none}
+.tab.has-dot .dot{display:block}
+
+/* ---------------- desktop: rail lateral ---------------- */
+@media (min-width:900px){
+  .app{flex-direction:row}
+  .tabbar{
+    order:-1;grid-template-columns:1fr;grid-auto-rows:max-content;align-content:start;
+    width:var(--rail);height:100%;overflow-y:auto;
+    border-top:0;border-right:1px solid var(--line);
+    padding:1.15rem .7rem 1rem;
+  }
+  .rail-brand{display:flex;align-items:center;gap:.7rem;padding:.3rem .65rem 1.5rem}
+  .rail-brand svg{width:34px;height:34px;color:var(--blue-400);flex-shrink:0}
+  .rail-brand .bt{display:flex;flex-direction:column;line-height:1}
+  .rail-brand .b1{font-family:var(--disp);font-size:1.05rem;font-weight:700;letter-spacing:.05em}
+  .rail-brand .b2{font-size:.52rem;letter-spacing:.36em;color:var(--blue-400);margin-top:.26rem;font-weight:700}
+  .tab{flex-direction:row;justify-content:flex-start;gap:.85rem;padding:.78rem 1rem;border-radius:14px;
+    margin-bottom:.15rem;min-height:0;transition:color .24s,background .24s}
+  .tab span{font-size:.88rem;letter-spacing:0}
+  .tab:hover{background:rgba(255,255,255,.055)}
+  .tab[aria-selected="true"]{background:var(--grad-soft);color:#fff}
+  .tab[aria-selected="true"]::before{top:50%;left:-.7rem;transform:translateY(-50%);width:3px;height:20px;border-radius:0 3px 3px 0}
+  .tab[aria-selected="true"] svg{transform:none}
+  .tab .dot{position:static;margin-left:auto;border-color:transparent}
+  .rail-foot{display:block;margin-top:1.3rem;padding:.9rem .95rem;border-radius:14px;
+    background:rgba(255,255,255,.035);border:1px solid var(--line)}
+  .rail-foot b{display:block;font-family:var(--disp);font-size:.8rem;font-weight:700;letter-spacing:-.01em}
+  .rail-foot span{display:block;font-size:.72rem;color:var(--ink-mute);margin-top:.2rem;line-height:1.45}
+  .bar-brand{display:none}
+  .app-title{text-align:left}
+  .app-title strong{font-size:1.1rem}
+}
+
+/* ===========================================================
+   COMPONENTES
+   =========================================================== */
+h1,h2,h3,h4{margin:0;line-height:1.14;font-weight:600;font-family:var(--disp)}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+
+.btn{--pad:.95rem 1.7rem;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:var(--pad);border-radius:999px;font-size:.9rem;font-weight:600;letter-spacing:.02em;
+  text-decoration:none;cursor:pointer;border:1px solid transparent;white-space:nowrap;
+  transition:transform .25s cubic-bezier(.2,.8,.3,1),box-shadow .25s,background .25s,color .25s,border-color .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:2px solid var(--blue-400);outline-offset:3px}
+.btn-pri{background:var(--grad);color:#06121F;box-shadow:0 14px 32px -14px rgba(59,130,246,.9),inset 0 1px 0 rgba(255,255,255,.5)}
+.btn-ghost{background:var(--glass);border-color:var(--line-blue);color:var(--blue-300)}
+.btn-ghost:hover{background:rgba(59,130,246,.14);color:#fff}
+.btn-sm{--pad:.7rem 1.25rem;font-size:.82rem}
+.btn-block{width:100%}
+.btn-row{display:flex;gap:.7rem}
+.btn-row .btn{flex:1}
+@media (max-width:400px){.btn-row{flex-direction:column}}
+
+.card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-lg);
+  backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 44px -26px rgba(0,0,0,.85);
+  padding:clamp(1.1rem,3.6vw,1.45rem)}
+.card+.card{margin-top:.85rem}
+.card-pad0{padding:0;overflow:hidden}
+
+.card-hd{display:flex;align-items:center;gap:.8rem}
+.card-hd+*{margin-top:1rem}
+.card-hd .ico{width:42px;height:42px;border-radius:13px}
+.card-hd .ico svg{width:20px;height:20px}
+.card-hd .ht{min-width:0;flex:1}
+.card-hd h4{font-size:.98rem;letter-spacing:-.01em}
+.card-hd p{margin:.15rem 0 0;font-size:.8rem;color:var(--ink-mute);line-height:1.45}
+
+.ico{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;flex-shrink:0;
+  background:linear-gradient(145deg,rgba(96,165,250,.26),rgba(96,165,250,.05));
+  border:1px solid var(--line-blue);color:var(--blue-300);box-shadow:inset 0 1px 0 rgba(147,197,253,.22)}
+.ico svg{width:23px;height:23px}
+
+.sec-lbl{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:700;margin:1.7rem 0 .7rem}
+.app-h{font-size:clamp(1.5rem,6vw,2rem);letter-spacing:-.03em;margin-bottom:.35rem}
+.app-p{color:var(--ink-soft);font-size:.93rem;margin:0 0 1.3rem}
+
+.badge{display:inline-flex;align-items:center;gap:.55rem;padding:.42rem 1rem;border-radius:999px;
+  background:rgba(59,130,246,.14);border:1px solid var(--line-blue);
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--blue-300)}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--blue-400);box-shadow:0 0 0 0 rgba(96,165,250,.7);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(96,165,250,0)}100%{box-shadow:0 0 0 0 rgba(96,165,250,0)}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+
+.status{display:inline-flex;align-items:center;gap:.4rem;padding:.33rem .75rem;border-radius:999px;
+  font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0}
+.status.ok{background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.35);color:#6EE7B7}
+.status b{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* hero */
+.hero-card{border-radius:var(--r-lg);padding:clamp(1.35rem,4.6vw,2rem);position:relative;overflow:hidden;
+  background:var(--grad-soft);border:1px solid var(--line-blue);
+  box-shadow:inset 0 1px 0 rgba(147,197,253,.2),0 0 60px -34px rgba(59,130,246,.9)}
+.hero-card::before{content:"";position:absolute;top:-55%;right:-22%;width:68%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,.38),transparent 68%);pointer-events:none}
+.hero-card>*{position:relative}
+.hero-card h2{font-size:clamp(1.45rem,6vw,2.1rem);letter-spacing:-.034em;line-height:1.1;margin:.7rem 0 .55rem}
+.hero-card .sub{margin:0;color:var(--ink-soft);font-size:.92rem}
+
+.hero-meta{display:flex;flex-wrap:wrap;gap:.45rem 1.1rem;margin-top:1.1rem}
+.hero-meta span{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:500;color:var(--ink-soft)}
+.hero-meta svg{width:16px;height:16px;color:var(--blue-400);flex-shrink:0}
+
+.mini-cd{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin-top:1.25rem}
+.mini-cell{background:rgba(5,8,15,.46);border:1px solid var(--line);border-radius:13px;padding:.65rem .2rem;text-align:center}
+.mini-num{font-family:var(--disp);font-size:clamp(1.05rem,4.6vw,1.5rem);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.mini-lbl{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-top:.3rem;font-weight:700}
+
+/* rows */
+.row{display:flex;align-items:center;gap:.8rem;padding:.8rem 0;border-bottom:1px solid var(--line);
+  text-decoration:none;color:inherit;width:100%;background:none;border-left:0;border-right:0;border-top:0;
+  cursor:pointer;text-align:left;font-family:inherit;transition:opacity .2s}
+.row:hover{opacity:.82}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row:first-child{padding-top:0}
+.row .ico{width:40px;height:40px;border-radius:12px}
+.row .ico svg{width:19px;height:19px}
+.row-txt{flex:1;min-width:0}
+.row-txt strong{display:block;font-size:.92rem;font-weight:600;line-height:1.3}
+.row-txt span{display:block;font-size:.79rem;color:var(--ink-mute);margin-top:.1rem}
+.chev{width:16px;height:16px;color:var(--ink-mute);flex-shrink:0}
+
+/* mapa */
+.map-panel{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;
+  position:relative;overflow:hidden;text-decoration:none;text-align:center;padding:1.5rem 1.2rem;
+  border-radius:var(--r-md);border:1px solid var(--line-blue);aspect-ratio:2.1/1;min-height:150px;
+  background:radial-gradient(circle at 50% 42%,rgba(59,130,246,.24),transparent 62%),linear-gradient(155deg,rgba(22,35,61,.85),rgba(5,8,15,.95));
+  transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s}
+.map-panel::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background-image:linear-gradient(rgba(96,165,250,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.11) 1px,transparent 1px);
+  background-size:42px 42px;-webkit-mask-image:radial-gradient(circle at 50% 45%,#000 8%,transparent 72%);mask-image:radial-gradient(circle at 50% 45%,#000 8%,transparent 72%)}
+.map-panel:hover{transform:translateY(-3px);box-shadow:0 0 60px -26px rgba(59,130,246,.9)}
+.map-pin{position:relative;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,rgba(96,165,250,.34),rgba(96,165,250,.06));border:1px solid var(--line-blue);color:var(--blue-300);
+  box-shadow:inset 0 1px 0 rgba(147,197,253,.3),0 0 40px -12px rgba(59,130,246,.9)}
+.map-pin svg{width:26px;height:26px}
+.map-txt{position:relative;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--blue-300)}
+
+/* stepper */
+.steps{display:flex;gap:.4rem;margin-bottom:1.35rem}
+.step-pip{flex:1;height:4px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+.step-pip i{display:block;height:100%;width:0;background:var(--grad);border-radius:999px;transition:width .4s cubic-bezier(.2,.8,.3,1)}
+.step-pip.done i,.step-pip.cur i{width:100%}
+.step-meta{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:1rem}
+.step-meta b{font-family:var(--disp);font-size:1.08rem;letter-spacing:-.01em}
+.step-meta span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);font-weight:700;white-space:nowrap}
+
+/* fields */
+.field{margin-bottom:.9rem}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:700;margin-bottom:.42rem}
+.field input,.field select,.field textarea{width:100%;padding:.85rem 1rem;border-radius:14px;
+  background:rgba(255,255,255,.055);border:1px solid var(--line);color:var(--ink);
+  font-family:var(--sans);font-size:1rem;transition:border-color .22s,background .22s,box-shadow .22s}
+.field textarea{resize:vertical;min-height:84px}
+.field input::placeholder,.field textarea::placeholder{color:rgba(233,238,248,.28)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue-500);
+  background:rgba(255,255,255,.085);box-shadow:0 0 0 3px rgba(59,130,246,.18)}
+.field-row{display:grid;gap:.9rem;grid-template-columns:1fr}
+@media (min-width:520px){.field-row{grid-template-columns:1fr 1fr}}
+
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{padding:.58rem 1rem;border-radius:999px;cursor:pointer;font-size:.85rem;font-weight:600;font-family:inherit;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink-soft);transition:all .22s}
+.chip:hover{border-color:var(--line-blue);color:#fff}
+.chip[aria-pressed="true"]{background:var(--grad);border-color:transparent;color:#06121F}
+
+.summary{border-radius:var(--r-md);border:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.03);margin:0}
+.sum-row{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 1rem;border-bottom:1px solid var(--line);font-size:.89rem}
+.sum-row:last-child{border-bottom:0}
+.sum-row dt{color:var(--ink-mute);margin:0;flex-shrink:0}
+.sum-row dd{margin:0;font-weight:600;text-align:right;word-break:break-word}
+
+/* credencial */
+.pass{position:relative;border-radius:var(--r-lg);overflow:hidden;padding:clamp(1.3rem,4.6vw,1.8rem);
+  background:linear-gradient(150deg,rgba(96,165,250,.2),rgba(99,102,241,.08) 55%,rgba(5,8,15,.5));
+  border:1px solid var(--line-blue);box-shadow:inset 0 1px 0 rgba(147,197,253,.24),0 22px 54px -28px rgba(0,0,0,.9)}
+.pass::before{content:"";position:absolute;top:-40%;left:-15%;width:72%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(59,130,246,.34),transparent 68%);pointer-events:none}
+.pass>*{position:relative}
+.pass-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.pass-ev{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-300);font-weight:700}
+.pass-name{font-family:var(--disp);font-size:clamp(1.3rem,5.4vw,1.8rem);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin:.85rem 0 .22rem}
+.pass-org{font-size:.86rem;color:var(--ink-soft)}
+.pass-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:1.25rem}
+.pass-cell{background:rgba(5,8,15,.48);border:1px solid var(--line);border-radius:13px;padding:.62rem .4rem;text-align:center}
+.pass-cell b{display:block;font-family:var(--disp);font-size:.95rem;font-weight:700;line-height:1.2}
+.pass-cell span{display:block;font-size:.48rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin-top:.28rem;font-weight:700}
+.pass-perf{display:flex;align-items:center;gap:.7rem;margin:1.15rem -.4rem}
+.pass-perf i{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--line) 0 7px,transparent 7px 14px)}
+.pass-perf b{width:16px;height:16px;border-radius:50%;background:var(--bg-950);flex-shrink:0}
+.pass-code{display:flex;align-items:center;gap:1rem}
+.pass-sigil{display:grid;grid-template-columns:repeat(5,1fr);gap:2.5px;width:56px;height:56px;flex-shrink:0;
+  padding:5px;border-radius:12px;background:rgba(5,8,15,.6);border:1px solid var(--line)}
+.pass-sigil i{border-radius:2px;background:rgba(255,255,255,.07)}
+.pass-sigil i.on{background:var(--blue-400)}
+.pass-ct{min-width:0}
+.pass-ct span{display:block;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:700}
+.pass-ct strong{display:block;font-family:var(--disp);font-size:clamp(1.05rem,4.4vw,1.3rem);font-weight:700;letter-spacing:.1em;margin-top:.18rem}
+
+/* empty */
+.empty{text-align:center;padding:clamp(1.8rem,8vw,3rem) 1.2rem}
+.empty .ico{width:62px;height:62px;border-radius:20px;margin:0 auto 1.15rem}
+.empty .ico svg{width:27px;height:27px}
+.empty h4{font-size:1.12rem;letter-spacing:-.02em;margin-bottom:.45rem}
+.empty p{color:var(--ink-mute);font-size:.88rem;margin:0 auto 1.3rem;max-width:34ch;line-height:1.55}
+
+/* perfil */
+.avatar{width:64px;height:64px;border-radius:21px;flex-shrink:0;display:grid;place-items:center;
+  font-family:var(--disp);font-size:1.4rem;font-weight:700;color:#06121F;background:var(--grad);
+  box-shadow:0 12px 28px -12px rgba(59,130,246,.9)}
+.profile-hd{display:flex;align-items:center;gap:1rem}
+.profile-hd .pt{min-width:0;flex:1}
+.profile-hd h3{font-size:clamp(1.12rem,4.6vw,1.4rem);letter-spacing:-.025em;line-height:1.2;word-break:break-word}
+.profile-hd p{margin:.18rem 0 .5rem;font-size:.84rem;color:var(--ink-mute)}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 82px);transform:translate(-50%,16px);z-index:400;
+  padding:.78rem 1.2rem;border-radius:999px;font-size:.85rem;font-weight:600;
+  background:rgba(11,19,34,.95);border:1px solid var(--line-blue);color:var(--blue-200);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 44px -18px rgba(0,0,0,.9);
+  opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility .3s;max-width:min(92vw,420px);text-align:center}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media (min-width:900px){.toast{bottom:1.4rem;left:calc(50% + var(--rail)/2)}}
+
+.foot-note{text-align:center;font-size:.75rem;color:var(--ink-mute);line-height:1.6;margin:1.8rem 0 0}
+</style>
+</head>
+<body>
+
+<div class="bg-field" aria-hidden="true"><div class="orb orb-a"></div><div class="orb orb-b"></div></div>
+
+<div class="app">
+
+  <!-- =============== TAB BAR / RAIL =============== -->
+  <nav class="tabbar" role="tablist" aria-label="Navegação do app">
+    <div class="rail-brand">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M14 10h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+        <path d="M26 22h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+      </svg>
+      <span class="bt"><span class="b1">GED<span style="color:var(--blue-400);margin:0 .18em">|</span>NEXO</span><span class="b2">VARGINHA</span></span>
+    </div>
+
+    <button class="tab" role="tab" id="tab-inicio" aria-controls="v-inicio" aria-selected="true" data-tab="inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20Z"/><path d="M9.5 21.5V14h5v7.5"/></svg>
+      <span>Início</span><i class="dot"></i>
+    </button>
+    <button class="tab" role="tab" id="tab-inscricao" aria-controls="v-inscricao" aria-selected="false" data-tab="inscricao">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h3.5A1.5 1.5 0 0 1 20 4.5v15a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5v-15A1.5 1.5 0 0 1 5.5 3H9"/><rect x="9" y="1.8" width="6" height="3.6" rx="1.2"/><path d="m8.5 13 2.2 2.2L15.5 10"/></svg>
+      <span>Inscrição</span><i class="dot"></i>
+    </button>
+    <button class="tab" role="tab" id="tab-credencial" aria-controls="v-credencial" aria-selected="false" data-tab="credencial">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.6"/><circle cx="8.5" cy="11" r="2.1"/><path d="M5 16.2c.7-1.4 2-2.1 3.5-2.1s2.8.7 3.5 2.1M15 10h4M15 13.5h2.5"/></svg>
+      <span>Credencial</span><i class="dot"></i>
+    </button>
+    <button class="tab" role="tab" id="tab-perfil" aria-controls="v-perfil" aria-selected="false" data-tab="perfil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.2" r="3.9"/><path d="M4.2 20.2c1.4-3.5 4.3-5.3 7.8-5.3s6.4 1.8 7.8 5.3"/></svg>
+      <span>Perfil</span><i class="dot"></i>
+    </button>
+
+    <div class="rail-foot">
+      <b>18 de novembro · 19h</b>
+      <span>Sítio Matsumura — Jardim Campinas</span>
+    </div>
+  </nav>
+
+  <!-- =============== MAIN =============== -->
+  <div class="app-main">
+
+    <div class="app-bar">
+      <div class="bar-brand">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M14 10h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+          <path d="M26 22h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+        </svg>
+        <span class="bt"><span class="b1">GED<span style="color:var(--blue-400);margin:0 .18em">|</span>NEXO</span><span class="b2">VARGINHA</span></span>
+      </div>
+      <span class="app-title"><strong id="appTitle">Início</strong><span>App do evento</span></span>
+      <button class="icon-btn" id="appShare" aria-label="Compartilhar o evento">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+      </button>
+    </div>
+
+    <div class="app-body" id="appBody">
+      <div class="app-inner">
+
+        <!-- ---------- INÍCIO ---------- -->
+        <section class="view active" id="v-inicio" role="tabpanel" aria-labelledby="tab-inicio" tabindex="0">
+
+          <div class="hero-card">
+            <span class="badge"><span class="pulse"></span>GED NEXO · 1 ano</span>
+            <h2 class="grad-text">Premiação &amp; Reconhecimento de Empresas Regionais</h2>
+            <p class="sub">Uma noite para celebrar conquistas e reconhecer as empresas parceiras.</p>
+
+            <div class="hero-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>18 de novembro</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>19h00</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Sítio Matsumura</span>
+            </div>
+
+            <div class="mini-cd" id="miniCd"></div>
+          </div>
+
+          <div class="card" id="statusCard"></div>
+
+          <div class="card">
+            <div class="card-hd">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.5 5 8.3 4.3 5 4.3v13c3.3 0 5.5.7 7 2.2 1.5-1.5 3.7-2.2 7-2.2v-13c-3.3 0-5.5.7-7 2.2Z"/><path d="M12 6.5v13"/></svg></span>
+              <span class="ht"><h4>Palestra com o Pastor Zezé</h4><p>Breve ensinamento sobre propósito e negócios.</p></span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-hd">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+              <span class="ht"><h4>Sítio Matsumura</h4><p>Rua Hermelina Trindade da Silva, 10 — Jardim Campinas</p></span>
+            </div>
+            <a class="map-panel" id="mapsPanel" href="#" target="_blank" rel="noopener" aria-label="Abrir o local no Google Maps">
+              <span class="map-pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+              <span class="map-txt">Toque para abrir a rota</span>
+            </a>
+          </div>
+
+          <div class="card">
+            <button class="row" id="rowShare">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span>
+              <span class="row-txt"><strong>Convidar um parceiro</strong><span>Enviar o convite no WhatsApp</span></span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- ---------- INSCRIÇÃO ---------- -->
+        <section class="view" id="v-inscricao" role="tabpanel" aria-labelledby="tab-inscricao" tabindex="0">
+          <h2 class="app-h grad-text">Inscrição</h2>
+          <p class="app-p">Três passos rápidos e sua credencial fica pronta.</p>
+
+          <div class="steps" aria-hidden="true">
+            <span class="step-pip" data-pip="1"><i></i></span>
+            <span class="step-pip" data-pip="2"><i></i></span>
+            <span class="step-pip" data-pip="3"><i></i></span>
+          </div>
+
+          <form id="rsvpForm" novalidate autocomplete="on">
+            <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+              <label for="f-site">Não preencha este campo</label>
+              <input id="f-site" type="text" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="card" data-step="1">
+              <div class="step-meta"><b>Seus dados</b><span>Passo 1 de 3</span></div>
+              <div class="field">
+                <label for="f-nome">Nome completo *</label>
+                <input id="f-nome" type="text" maxlength="120" placeholder="Como quer ser chamado no crachá" autocomplete="name" required>
+              </div>
+              <div class="field-row">
+                <div class="field"><label for="f-empresa">Empresa</label>
+                  <input id="f-empresa" type="text" maxlength="120" placeholder="Nome da empresa" autocomplete="organization"></div>
+                <div class="field"><label for="f-cargo">Cargo</label>
+                  <input id="f-cargo" type="text" maxlength="80" placeholder="Ex.: Sócio, Diretor" autocomplete="organization-title"></div>
+              </div>
+              <div class="btn-row" style="margin-top:1.4rem">
+                <button class="btn btn-pri btn-block" type="button" data-next="2">Continuar</button>
+              </div>
+            </div>
+
+            <div class="card" data-step="2" hidden>
+              <div class="step-meta"><b>Contato</b><span>Passo 2 de 3</span></div>
+              <div class="field"><label for="f-whats">WhatsApp *</label>
+                <input id="f-whats" type="tel" inputmode="tel" maxlength="16" placeholder="(35) 99999-9999" autocomplete="tel" required></div>
+              <div class="field"><label for="f-email">E-mail</label>
+                <input id="f-email" type="email" inputmode="email" maxlength="160" placeholder="voce@empresa.com.br" autocomplete="email"></div>
+              <div class="field"><label>Quantas pessoas vão com você</label>
+                <div class="chips" id="qtdChips" role="group" aria-label="Número de pessoas">
+                  <button class="chip" type="button" aria-pressed="true" data-qtd="1">Só eu</button>
+                  <button class="chip" type="button" aria-pressed="false" data-qtd="2">2</button>
+                  <button class="chip" type="button" aria-pressed="false" data-qtd="3">3</button>
+                  <button class="chip" type="button" aria-pressed="false" data-qtd="4">4</button>
+                  <button class="chip" type="button" aria-pressed="false" data-qtd="5+">5 ou mais</button>
+                </div>
+              </div>
+              <div class="btn-row" style="margin-top:1.4rem">
+                <button class="btn btn-ghost" type="button" data-prev="1">Voltar</button>
+                <button class="btn btn-pri" type="button" data-next="3">Continuar</button>
+              </div>
+            </div>
+
+            <div class="card" data-step="3" hidden>
+              <div class="step-meta"><b>Confirmação</b><span>Passo 3 de 3</span></div>
+              <dl class="summary" id="summary"></dl>
+              <div class="field" style="margin-top:1rem"><label for="f-obs">Observação (opcional)</label>
+                <textarea id="f-obs" maxlength="500" placeholder="Restrição alimentar, chegada mais tarde, alguma necessidade…"></textarea></div>
+              <div class="btn-row" style="margin-top:1.4rem">
+                <button class="btn btn-ghost" type="button" data-prev="2">Voltar</button>
+                <button class="btn btn-pri" type="submit">Confirmar presença</button>
+              </div>
+              <p style="text-align:center;font-size:.77rem;color:var(--ink-mute);margin:1rem 0 0;line-height:1.55">
+                Ao confirmar, sua credencial é gerada e abrimos o WhatsApp com os dados para a organização.
+              </p>
+            </div>
+          </form>
+        </section>
+
+        <!-- ---------- CREDENCIAL ---------- -->
+        <section class="view" id="v-credencial" role="tabpanel" aria-labelledby="tab-credencial" tabindex="0">
+          <h2 class="app-h grad-text">Credencial</h2>
+          <p class="app-p">Apresente este código na recepção do evento.</p>
+          <div id="credBox"></div>
+        </section>
+
+        <!-- ---------- PERFIL ---------- -->
+        <section class="view" id="v-perfil" role="tabpanel" aria-labelledby="tab-perfil" tabindex="0">
+          <h2 class="app-h grad-text">Perfil</h2>
+          <p class="app-p">Seus dados ficam salvos só neste aparelho.</p>
+          <div id="perfilBox"></div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===========================================================
+     CONFIGURAÇÃO — edite só esta parte
+     =========================================================== */
+  var CONFIG = {
+    whatsapp : "5511937449184",                  // nº que recebe as confirmações (55 + DDD + número)
+    siteUrl  : "https://gednexo-evento.vercel.app",                               // ex.: "https://gednexo.vercel.app" — entra no texto do convite
+    eventDate: new Date(2026, 10, 18, 19, 0, 0), // mês começa em 0 → 10 = novembro
+    address  : "Rua Hermelina Trindade da Silva, 10 - Jardim Campinas, Varginha",
+
+    // Banco das inscrições. A chave abaixo é pública de propósito:
+    // ela só consegue GRAVAR uma inscrição, nunca ler a lista de convidados.
+    supabase : {
+      url: "https://divopnirxrjtvbwwrqgu.supabase.co",
+      key: "sb_publishable_3PcXXLW5N-eWFJFFG-2xrw_PqhOV4ro"
+    }
+  };
+  /* =========================================================== */
+
+  var $  = function(s,c){ return (c||document).querySelector(s); };
+  var $$ = function(s,c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+  var esc = function(v){ return String(v==null?"":v).replace(/[&<>"'`=\/]/g, function(m){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","`":"&#96;","=":"&#61;","/":"&#47;"}[m]; }); };
+  var abertoEm = Date.now();
+
+  var mapsHref = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.address);
+  var waBase   = "https://wa.me/" + CONFIG.whatsapp + "?text=";
+
+  /* ---------- storage ---------- */
+  var KEY = "gednexo.rsvp.v1";
+  function load(){ try{ var r = localStorage.getItem(KEY); return r ? JSON.parse(r) : null; }catch(e){ return null; } }
+  function save(d){ try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+  function wipe(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+  var state = load();
+
+  $("#mapsPanel").href = mapsHref;
+
+  /* ---------- toast ---------- */
+  var toastEl = $("#toast"), toastT;
+  function toast(txt){
+    toastEl.textContent = txt; toastEl.classList.add("show");
+    clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove("show"); }, 3200);
+  }
+
+  /* ---------- compartilhar ---------- */
+  function siteUrl(){
+    if(CONFIG.siteUrl) return CONFIG.siteUrl;
+    try{
+      // dentro de um iframe o location.href não é um link compartilhável
+      if(window.top === window.self && /^https?:/.test(location.href)) return location.href;
+    }catch(e){}
+    return "";
+  }
+  function shareText(){
+    var u = siteUrl();
+    return "🏆 PREMIAÇÃO & RECONHECIMENTO DE EMPRESAS REGIONAIS — GED NEXO Varginha\n\n" +
+           "📅 18 de novembro, às 19h\n" +
+           "📍 Rua Hermelina Trindade da Silva, 10 — Sítio Matsumura (Jardim Campinas)\n" +
+           "✨ Palestra com o Pastor Zezé\n\n" +
+           "Celebrando conquistas, valorizando parceiros e fortalecendo o nosso negócio!" +
+           (u ? "\n\nConfirme sua presença: " + u : "");
+  }
+  function copyShare(){
+    var t = shareText();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(
+        function(){ toast("Convite copiado! É só colar no WhatsApp."); },
+        function(){ toast("Não consegui abrir o WhatsApp por aqui."); });
+    }else{
+      toast("Não consegui abrir o WhatsApp por aqui.");
+    }
+  }
+  function openWa(){
+    var w = null;
+    try{ w = window.open("https://wa.me/?text=" + encodeURIComponent(shareText()), "_blank", "noopener"); }catch(e){}
+    if(!w) copyShare();   // pop-up bloqueado → cai pra cópia
+  }
+  function doShare(){
+    var data = { title:"GED NEXO Varginha", text:shareText() };
+    var can = false;
+    try{ can = !!(navigator.share && (!navigator.canShare || navigator.canShare(data))); }catch(e){ can = false; }
+
+    if(can){
+      navigator.share(data).then(null, function(err){
+        if(err && err.name === "AbortError") return;  // o usuário fechou o menu
+        openWa();
+      });
+    }else{
+      openWa();
+    }
+  }
+  ["#appShare","#rowShare"].forEach(function(s){ var e = $(s); if(e) e.addEventListener("click", doShare); });
+
+  /* ---------- contagem regressiva ---------- */
+  var miniEl = $("#miniCd"), labels = ["dias","horas","min","seg"];
+  var FIM = CONFIG.eventDate.getTime() + 6*60*60*1000;  // ~6h depois = evento encerrado
+
+  function tick(){
+    var diff = CONFIG.eventDate.getTime() - Date.now();
+    if(diff <= 0){
+      var txt = Date.now() > FIM
+        ? "Evento realizado. Obrigado por participar!"
+        : "É hoje! Nos vemos às 19h";
+      miniEl.innerHTML = '<div class="mini-cell" style="grid-column:1/-1"><div class="mini-num grad-text">'+txt+'</div></div>';
+      return false;
+    }
+    var s = Math.floor(diff/1000);
+    var v = [Math.floor(s/86400), Math.floor(s%86400/3600), Math.floor(s%3600/60), s%60];
+    var h = "";
+    for(var i=0;i<4;i++){
+      h += '<div class="mini-cell"><div class="mini-num grad-text">'+String(v[i]).padStart(2,"0")+
+           '</div><div class="mini-lbl">'+labels[i]+'</div></div>';
+    }
+    miniEl.innerHTML = h;
+    return true;
+  }
+  if(tick()){ var t = setInterval(function(){ if(!tick()) clearInterval(t); }, 1000); }
+
+  /* ---------- navegação ---------- */
+  var appBody = $("#appBody"), appTitle = $("#appTitle");
+  var TITLES = { inicio:"Início", inscricao:"Inscrição", credencial:"Credencial", perfil:"Perfil" };
+
+  var current = "";
+
+  function goTab(name, push){
+    if(!TITLES[name]) name = "inicio";
+    current = name;
+    $$(".view").forEach(function(v){ v.classList.toggle("active", v.id === "v-"+name); });
+    $$(".tab").forEach(function(t){ t.setAttribute("aria-selected", t.dataset.tab === name ? "true" : "false"); });
+    appTitle.textContent = TITLES[name];
+    appBody.scrollTop = 0;
+    if(name === "credencial") renderCred();
+    if(name === "perfil")     renderPerfil();
+    if(name === "inicio")     renderStatus();
+
+    // guarda a aba na URL para o botão voltar do celular funcionar
+    if(push !== false){
+      try{
+        if(location.hash.slice(1) !== name) history.pushState({ tab:name }, "", "#" + name);
+      }catch(e){}
+    }
+  }
+  $$(".tab").forEach(function(t){ t.addEventListener("click", function(){ goTab(t.dataset.tab); }); });
+
+  window.addEventListener("popstate", function(e){
+    var n = (e.state && e.state.tab) || location.hash.slice(1) || "inicio";
+    goTab(n, false);
+  });
+  function bindGo(scope){
+    $$("[data-go]", scope).forEach(function(b){
+      if(b.dataset.bound) return; b.dataset.bound = "1";
+      b.addEventListener("click", function(){ goTab(b.dataset.go); });
+    });
+  }
+
+  /* ---------- status ---------- */
+  function renderStatus(){
+    var box = $("#statusCard");
+    if(state){
+      box.innerHTML =
+        '<div class="card-hd">'+
+          '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>'+
+          '<span class="ht"><h4>Presença confirmada</h4><p>'+esc(state.nome)+'</p></span>'+
+        '</div>'+
+        '<button class="btn btn-pri btn-block btn-sm" data-go="credencial">Ver minha credencial</button>';
+    }else{
+      box.innerHTML =
+        '<div class="card-hd">'+
+          '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.2v.1"/></svg></span>'+
+          '<span class="ht"><h4>Presença não confirmada</h4><p>Leva menos de um minuto</p></span>'+
+        '</div>'+
+        '<button class="btn btn-pri btn-block btn-sm" data-go="inscricao">Fazer inscrição agora</button>';
+    }
+    bindGo(box);
+    $$(".tab").forEach(function(t){ t.classList.toggle("has-dot", t.dataset.tab === "credencial" && !!state); });
+  }
+
+  /* ---------- formulário ---------- */
+  var qtd = "1";
+  function showStep(n){
+    $$("[data-step]").forEach(function(c){ c.hidden = Number(c.dataset.step) !== n; });
+    $$(".step-pip").forEach(function(p){
+      var i = Number(p.dataset.pip);
+      p.classList.toggle("done", i < n); p.classList.toggle("cur", i === n);
+    });
+    if(n === 3) renderSummary();
+    appBody.scrollTop = 0;
+  }
+  $$("#qtdChips .chip").forEach(function(c){
+    c.addEventListener("click", function(){
+      qtd = c.dataset.qtd;
+      $$("#qtdChips .chip").forEach(function(o){ o.setAttribute("aria-pressed", o === c ? "true" : "false"); });
+    });
+  });
+
+  /* máscara (11) 98765-4321 */
+  function maskPhone(v){
+    var d = String(v).replace(/\D/g,"").slice(0,11);
+    if(!d) return "";
+    if(d.length <= 2)  return "(" + d;
+    if(d.length <= 6)  return "(" + d.slice(0,2) + ") " + d.slice(2);
+    if(d.length <= 10) return "(" + d.slice(0,2) + ") " + d.slice(2,6) + "-" + d.slice(6);
+    return "(" + d.slice(0,2) + ") " + d.slice(2,7) + "-" + d.slice(7);
+  }
+  $("#f-whats").addEventListener("input", function(){
+    var pos = this.selectionStart, antes = this.value.length;
+    this.value = maskPhone(this.value);
+    if(pos < antes) { try{ this.setSelectionRange(pos, pos); }catch(e){} }
+  });
+  function readForm(){
+    return { nome:$("#f-nome").value.trim(), empresa:$("#f-empresa").value.trim(), cargo:$("#f-cargo").value.trim(),
+             whats:$("#f-whats").value.trim(), email:$("#f-email").value.trim(), qtd:qtd, obs:$("#f-obs").value.trim() };
+  }
+  function renderSummary(){
+    var d = readForm();
+    var rows = [["Nome",d.nome||"—"],["Empresa",d.empresa||"—"],["Cargo",d.cargo||"—"],
+                ["WhatsApp",d.whats||"—"],["E-mail",d.email||"—"],
+                ["Pessoas", d.qtd === "1" ? "Somente você" : d.qtd]];
+    $("#summary").innerHTML = rows.map(function(r){
+      return '<div class="sum-row"><dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd></div>'; }).join("");
+  }
+  $$("[data-next]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var to = Number(b.dataset.next);
+      if(to === 2 && !$("#f-nome").value.trim()){ toast("Preencha seu nome para continuar."); $("#f-nome").focus(); return; }
+      if(to === 3 && !$("#f-whats").value.trim()){ toast("Preencha seu WhatsApp para continuar."); $("#f-whats").focus(); return; }
+      showStep(to);
+    });
+  });
+  $$("[data-prev]").forEach(function(b){ b.addEventListener("click", function(){ showStep(Number(b.dataset.prev)); }); });
+
+  /* código local só de emergência, quando o servidor não responde */
+  function codigoLocal(){
+    var A = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", o = "";
+    for(var i=0;i<6;i++){
+      o += A[Math.floor(Math.random()*A.length)];
+      if(i === 2) o += "-";
+    }
+    return "GN-" + o;
+  }
+
+  /* grava no Supabase. O código é gerado PELO SERVIDOR — o cliente
+     não escolhe, então ninguém consegue sobrescrever a inscrição de outro. */
+  function enviarParaBanco(d){
+    var sb = CONFIG.supabase;
+    if(!sb || !sb.url || !sb.key) return Promise.resolve({ ok:false, erro:"Configuração ausente." });
+
+    var ctrl = null, timer = null;
+    try{ ctrl = new AbortController(); timer = setTimeout(function(){ ctrl.abort(); }, 15000); }catch(e){}
+
+    return fetch(sb.url + "/rest/v1/rpc/registrar_inscricao", {
+      method : "POST",
+      headers: { "apikey": sb.key, "Authorization": "Bearer " + sb.key, "Content-Type": "application/json" },
+      body   : JSON.stringify({
+        p_nome      : d.nome,
+        p_whatsapp  : d.whats,
+        p_empresa   : d.empresa || null,
+        p_cargo     : d.cargo   || null,
+        p_email     : d.email   || null,
+        p_pessoas   : d.qtd     || "1",
+        p_observacao: d.obs     || null
+      }),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function(r){
+      if(timer) clearTimeout(timer);
+      return r.json().then(function(j){
+        if(r.ok && typeof j === "string") return { ok:true, codigo:j };
+        return { ok:false, erro:(j && (j.message || j.error_description)) || ("Erro " + r.status) };
+      }, function(){ return { ok:false, erro:"Resposta inesperada do servidor." }; });
+    }).catch(function(err){
+      if(timer) clearTimeout(timer);
+      var m = String(err && err.name === "AbortError" ? "A conexão demorou demais." : (err && err.message || err));
+      return { ok:false, erro:m };
+    });
+  }
+
+  function textoWhats(d){
+    return "*CONFIRMAÇÃO DE PRESENÇA — GED NEXO VARGINHA*\n" +
+      "_Premiação & Reconhecimento de Empresas Regionais_\n\n" +
+      "👤 *Nome:* " + d.nome + "\n" +
+      "🏢 *Empresa:* " + (d.empresa || "—") + "\n" +
+      "💼 *Cargo:* " + (d.cargo || "—") + "\n" +
+      "📱 *WhatsApp:* " + d.whats + "\n" +
+      "✉️ *E-mail:* " + (d.email || "—") + "\n" +
+      "👥 *Pessoas:* " + (d.qtd === "1" ? "Somente eu" : d.qtd) +
+      (d.code ? "\n🎟️ *Credencial:* " + d.code : "") +
+      (d.obs ? "\n💬 *Observação:* " + d.obs : "");
+  }
+
+  $("#rsvpForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    // armadilha anti-robô: campo invisível que só um bot preenche
+    var isca = $("#f-site");
+    if(isca && isca.value){ toast("Não foi possível enviar."); return; }
+
+    // robô costuma enviar em menos de 2 segundos
+    if(Date.now() - abertoEm < 2000){ toast("Confira os dados antes de enviar."); return; }
+
+    var d = readForm();
+    if(!d.nome){  toast("Preencha seu nome."); showStep(1); $("#f-nome").focus(); return; }
+    if(String(d.whats).replace(/\D/g,"").length < 10){
+      toast("Informe o WhatsApp com DDD."); showStep(2); $("#f-whats").focus(); return;
+    }
+
+    var btn = $("#rsvpForm button[type=submit]");
+    if(btn){ btn.disabled = true; btn.textContent = "Enviando…"; }
+
+    enviarParaBanco(d).then(function(res){
+      if(btn){ btn.disabled = false; btn.textContent = "Confirmar presença"; }
+
+      d.at = Date.now();
+      d.code = res.ok ? res.codigo : codigoLocal();
+      d.sincronizado = !!res.ok;
+      state = d; save(d);
+
+      renderStatus(); renderCred(); renderPerfil();
+      goTab("credencial");
+
+      if(res.ok){
+        toast("Presença confirmada! Credencial " + d.code);
+      }else if(/Muitas tentativas/i.test(res.erro || "")){
+        toast("Muitas tentativas seguidas. Aguarde alguns minutos.");
+      }else{
+        toast("Salvo no aparelho. Avise a organização pelo WhatsApp.");
+      }
+    });
+  });
+
+  /* ---------- credencial ---------- */
+  function sigil(code){
+    var s = 0;
+    for(var i=0;i<code.length;i++){ s = (s*33 + code.charCodeAt(i)) >>> 0; }
+    var out = "";
+    for(var r=0;r<5;r++){
+      for(var c=0;c<5;c++){
+        var m = c > 2 ? 4 - c : c;
+        out += '<i class="'+(((s >>> ((r*3 + m) % 30)) & 1) ? "on" : "")+'"></i>';
+      }
+    }
+    return out;
+  }
+
+  function renderCred(){
+    var box = $("#credBox");
+    if(!state){
+      box.innerHTML =
+        '<div class="card empty">'+
+          '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.6"/><circle cx="8.5" cy="11" r="2.1"/><path d="M5 16.2c.7-1.4 2-2.1 3.5-2.1s2.8.7 3.5 2.1M15 10h4M15 13.5h2.5"/></svg></span>'+
+          '<h4>Nenhuma credencial ainda</h4>'+
+          '<p>Faça sua inscrição e a credencial digital aparece aqui na hora.</p>'+
+          '<button class="btn btn-pri" data-go="inscricao">Fazer inscrição</button>'+
+        '</div>';
+    }else{
+      box.innerHTML =
+        '<div class="pass">'+
+          '<div class="pass-top"><span class="pass-ev">GED NEXO Varginha · 18 nov</span><span class="status ok"><b></b>Confirmado</span></div>'+
+          '<div class="pass-name">'+esc(state.nome)+'</div>'+
+          '<div class="pass-org">'+esc(state.empresa || "Convidado")+(state.cargo ? " · "+esc(state.cargo) : "")+'</div>'+
+          '<div class="pass-grid">'+
+            '<div class="pass-cell"><b>18/11</b><span>Data</span></div>'+
+            '<div class="pass-cell"><b>19h00</b><span>Início</span></div>'+
+            '<div class="pass-cell"><b>'+esc(state.qtd)+'</b><span>Pessoas</span></div>'+
+          '</div>'+
+          '<div class="pass-perf" aria-hidden="true"><b></b><i></i><b></b></div>'+
+          '<div class="pass-code">'+
+            '<span class="pass-sigil" aria-hidden="true">'+sigil(state.code)+'</span>'+
+            '<span class="pass-ct"><span>Código de entrada</span><strong>'+esc(state.code)+'</strong></span>'+
+          '</div>'+
+        '</div>'+
+        (state.sincronizado === false
+          ? '<div class="card" style="border-color:rgba(251,191,36,.3)">'+
+              '<div class="card-hd">'+
+                '<span class="ico" style="color:#FCD34D;border-color:rgba(251,191,36,.32);background:linear-gradient(145deg,rgba(251,191,36,.18),rgba(251,191,36,.04))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3 2.5 20h19L12 3Z"/><path d="M12 10v4M12 17v.1"/></svg></span>'+
+                '<span class="ht"><h4>Confirmação só neste aparelho</h4><p>Não conseguimos avisar a organização. Mande a mensagem no WhatsApp para garantir seu lugar.</p></span>'+
+              '</div>'+
+            '</div>'
+          : '')+
+        '<div class="card">'+
+          '<div class="card-hd">'+
+            '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.2v.1"/></svg></span>'+
+            '<span class="ht"><h4>Na recepção</h4><p>Informe seu nome ou o código acima a partir das 18h30.</p></span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="card">'+
+          '<a class="row" id="credWhats" href="'+esc(waBase + encodeURIComponent(textoWhats(state)))+'" target="_blank" rel="noopener">'+
+            '<span class="ico" style="color:#6EE7B7;border-color:rgba(52,211,153,.3);background:linear-gradient(145deg,rgba(52,211,153,.2),rgba(52,211,153,.04))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.2-.6L3 21l1.8-5a8.3 8.3 0 0 1-.8-3.6A8.4 8.4 0 0 1 12.5 4 8.4 8.4 0 0 1 21 11.5Z"/></svg></span>'+
+            '<span class="row-txt"><strong>'+(state.sincronizado === false ? "Avisar a organização agora" : "Avisar no WhatsApp")+'</strong><span>'+(state.sincronizado === false ? "Sua inscrição ainda não chegou ao sistema" : "Opcional — já registramos sua presença")+'</span></span>'+
+            '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>'+
+          '</a>'+
+          '<button class="row" id="credCopy">'+
+            '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.4"/><path d="M5.5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5v1"/></svg></span>'+
+            '<span class="row-txt"><strong>Copiar código</strong><span>'+esc(state.code)+'</span></span>'+
+            '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>'+
+          '</button>'+
+          '<a class="row" href="'+mapsHref+'" target="_blank" rel="noopener">'+
+            '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>'+
+            '<span class="row-txt"><strong>Traçar rota</strong><span>Sítio Matsumura</span></span>'+
+            '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>'+
+          '</a>'+
+        '</div>';
+
+      var cc = $("#credCopy", box);
+      if(cc) cc.addEventListener("click", function(){
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(state.code).then(
+            function(){ toast("Código copiado: " + state.code); },
+            function(){ toast("Seu código: " + state.code); });
+        }else{ toast("Seu código: " + state.code); }
+      });
+    }
+    bindGo(box);
+  }
+
+  /* ---------- perfil ---------- */
+  function renderPerfil(){
+    var box = $("#perfilBox");
+    if(!state){
+      box.innerHTML =
+        '<div class="card empty">'+
+          '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.2" r="3.9"/><path d="M4.2 20.2c1.4-3.5 4.3-5.3 7.8-5.3s6.4 1.8 7.8 5.3"/></svg></span>'+
+          '<h4>Perfil vazio</h4>'+
+          '<p>Depois da inscrição, seus dados ficam guardados aqui para consultar quando quiser.</p>'+
+          '<button class="btn btn-pri" data-go="inscricao">Fazer inscrição</button>'+
+        '</div>';
+    }else{
+      var ini = state.nome.trim().split(/\s+/).slice(0,2).map(function(w){ return w[0]; }).join("").toUpperCase();
+      box.innerHTML =
+        '<div class="card">'+
+          '<div class="profile-hd">'+
+            '<span class="avatar">'+esc(ini)+'</span>'+
+            '<span class="pt"><h3>'+esc(state.nome)+'</h3>'+
+              '<p>'+esc(state.empresa || "Convidado")+(state.cargo ? " · "+esc(state.cargo) : "")+'</p>'+
+              '<span class="status ok"><b></b>Confirmado</span></span>'+
+          '</div>'+
+        '</div>'+
+        '<div class="card">'+
+          '<dl class="summary" style="border:0">'+
+            '<div class="sum-row"><dt>WhatsApp</dt><dd>'+esc(state.whats)+'</dd></div>'+
+            '<div class="sum-row"><dt>E-mail</dt><dd>'+esc(state.email || "—")+'</dd></div>'+
+            '<div class="sum-row"><dt>Pessoas</dt><dd>'+esc(state.qtd === "1" ? "Somente você" : state.qtd)+'</dd></div>'+
+            '<div class="sum-row"><dt>Credencial</dt><dd>'+esc(state.code)+'</dd></div>'+
+            (state.obs ? '<div class="sum-row"><dt>Observação</dt><dd>'+esc(state.obs)+'</dd></div>' : '')+
+          '</dl>'+
+        '</div>'+
+        '<div class="card">'+
+          '<button class="row" data-go="inscricao">'+
+            '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17v3Z"/></svg></span>'+
+            '<span class="row-txt"><strong>Editar inscrição</strong><span>Corrigir dados ou nº de pessoas</span></span>'+
+            '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>'+
+          '</button>'+
+          '<button class="row" id="pfShare">'+
+            '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg></span>'+
+            '<span class="row-txt"><strong>Convidar um parceiro</strong><span>Compartilhar o convite</span></span>'+
+            '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>'+
+          '</button>'+
+          '<a class="row" href="'+waBase+encodeURIComponent("Olá! Sou "+state.nome+" e tenho uma dúvida sobre o evento do GED NEXO Varginha.")+'" target="_blank" rel="noopener">'+
+            '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.2-.6L3 21l1.8-5a8.3 8.3 0 0 1-.8-3.6A8.4 8.4 0 0 1 12.5 4 8.4 8.4 0 0 1 21 11.5Z"/></svg></span>'+
+            '<span class="row-txt"><strong>Falar com a organização</strong><span>Tirar dúvidas no WhatsApp</span></span>'+
+            '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>'+
+          '</a>'+
+          '<button class="row" id="pfWipe">'+
+            '<span class="ico" style="color:#FCA5A5;border-color:rgba(248,113,113,.3);background:linear-gradient(145deg,rgba(248,113,113,.2),rgba(248,113,113,.04))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9.5 7V5.2A1.2 1.2 0 0 1 10.7 4h2.6a1.2 1.2 0 0 1 1.2 1.2V7M6.5 7l.8 12.1A1.5 1.5 0 0 0 8.8 20.5h6.4a1.5 1.5 0 0 0 1.5-1.4L17.5 7"/></svg></span>'+
+            '<span class="row-txt"><strong style="color:#FCA5A5">Apagar meus dados</strong><span>Remover tudo deste aparelho</span></span>'+
+            '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>'+
+          '</button>'+
+        '</div>';
+
+      var ps = $("#pfShare", box); if(ps) ps.addEventListener("click", doShare);
+      var pw = $("#pfWipe", box);
+      if(pw) pw.addEventListener("click", function(){
+        wipe(); state = null;
+        $("#rsvpForm").reset(); qtd = "1";
+        $$("#qtdChips .chip").forEach(function(c){ c.setAttribute("aria-pressed", c.dataset.qtd === "1" ? "true" : "false"); });
+        showStep(1); renderStatus(); renderCred(); renderPerfil();
+        toast("Dados apagados deste aparelho."); goTab("inicio");
+      });
+    }
+    bindGo(box);
+  }
+
+  /* ---------- prefill ---------- */
+  if(state){
+    $("#f-nome").value    = state.nome    || "";
+    $("#f-empresa").value = state.empresa || "";
+    $("#f-cargo").value   = state.cargo   || "";
+    $("#f-whats").value   = state.whats   || "";
+    $("#f-email").value   = state.email   || "";
+    $("#f-obs").value     = state.obs     || "";
+    qtd = state.qtd || "1";
+    $$("#qtdChips .chip").forEach(function(c){ c.setAttribute("aria-pressed", c.dataset.qtd === qtd ? "true" : "false"); });
+  }
+
+  bindGo(document);
+  showStep(1);
+  renderStatus(); renderCred(); renderPerfil();
+
+  var inicial = location.hash.slice(1);
+  goTab(TITLES[inicial] ? inicial : "inicio", false);
+
+})();
+</script>
+
+</body>
+</html>

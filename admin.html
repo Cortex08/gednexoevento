@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Painel — GED NEXO Varginha</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#05080F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%23080D1A'/%3E%3Cg fill='none' stroke='%2360A5FA' stroke-width='3.4'%3E%3Cpath d='M14 10h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z'/%3E%3Cpath d='M26 22h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-950:#05080F; --bg-900:#080D1A;
+  --blue-200:#BFDBFE; --blue-300:#93C5FD; --blue-400:#60A5FA; --blue-500:#3B82F6;
+  --ink:#E9EEF8; --ink-soft:rgba(233,238,248,.70); --ink-mute:rgba(233,238,248,.46);
+  --glass:rgba(255,255,255,.045); --line:rgba(255,255,255,.10); --line-blue:rgba(96,165,250,.30);
+  --ok:#34D399; --warn:#FCD34D; --bad:#F87171;
+  --grad:linear-gradient(135deg,#93C5FD 0%,#60A5FA 30%,#3B82F6 62%,#6366F1 100%);
+  --grad-soft:linear-gradient(135deg,rgba(96,165,250,.18),rgba(99,102,241,.06));
+  --r-md:18px; --r-lg:24px;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --disp:"Space Grotesk","Inter",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--sans);background:var(--bg-950);color:var(--ink);
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--disp);font-weight:600;line-height:1.15}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(1000px 700px at 12% -8%,#14294F 0%,transparent 58%),
+  radial-gradient(860px 620px at 92% 4%,#112344 0%,transparent 56%),
+  linear-gradient(180deg,#080D1A 0%,#05080F 55%,#080D1A 100%)}
+
+.wrap{position:relative;z-index:1;min-height:100%;display:flex;flex-direction:column}
+.inner{width:min(1080px,100% - 2rem);margin-inline:auto}
+
+.card{background:var(--glass);border:1px solid var(--line);border-radius:var(--r-lg);
+  backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 44px -26px rgba(0,0,0,.85);
+  padding:clamp(1.1rem,3.6vw,1.5rem)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.78rem 1.4rem;border-radius:999px;font-size:.88rem;font-weight:600;cursor:pointer;
+  border:1px solid transparent;white-space:nowrap;text-decoration:none;
+  transition:transform .22s,box-shadow .22s,background .22s,color .22s,border-color .22s}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-pri{background:var(--grad);color:#06121F;box-shadow:0 12px 28px -14px rgba(59,130,246,.9)}
+.btn-ghost{background:var(--glass);border-color:var(--line-blue);color:var(--blue-300)}
+.btn-ghost:hover{background:rgba(59,130,246,.14);color:#fff}
+.btn-sm{padding:.55rem 1rem;font-size:.8rem}
+.btn-block{width:100%}
+
+.field{margin-bottom:.9rem}
+.field label{display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:700;margin-bottom:.42rem}
+.field input{width:100%;padding:.85rem 1rem;border-radius:14px;background:rgba(255,255,255,.055);
+  border:1px solid var(--line);color:var(--ink);font-family:var(--sans);font-size:1rem;
+  transition:border-color .22s,background .22s,box-shadow .22s}
+.field input:focus{outline:none;border-color:var(--blue-500);background:rgba(255,255,255,.085);
+  box-shadow:0 0 0 3px rgba(59,130,246,.18)}
+
+/* ---------- login ---------- */
+.login{flex:1;display:grid;place-items:center;padding:1.5rem}
+.login-box{width:min(400px,100%)}
+.login-mark{display:flex;align-items:center;gap:.7rem;justify-content:center;margin-bottom:1.6rem}
+.login-mark svg{width:38px;height:38px;color:var(--blue-400)}
+.login-mark .t{display:flex;flex-direction:column;line-height:1}
+.login-mark .t1{font-family:var(--disp);font-size:1.1rem;font-weight:700;letter-spacing:.05em}
+.login-mark .t2{font-size:.52rem;letter-spacing:.34em;color:var(--blue-400);margin-top:.26rem;font-weight:700}
+.login h1{font-size:1.4rem;letter-spacing:-.02em;text-align:center;margin-bottom:.35rem}
+.login .sub{text-align:center;color:var(--ink-mute);font-size:.86rem;margin:0 0 1.5rem}
+
+.alert{margin-top:.9rem;padding:.75rem 1rem;border-radius:13px;font-size:.85rem;display:none}
+.alert.show{display:block}
+.alert.err{background:rgba(248,113,113,.14);border:1px solid rgba(248,113,113,.32);color:#FCA5A5}
+
+/* ---------- topo ---------- */
+.top{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);
+  background:rgba(8,13,26,.78);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+  padding:calc(env(safe-area-inset-top,0px) + .8rem) 0 .8rem}
+.top-row{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}
+.top-mark{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
+.top-mark svg{width:30px;height:30px;color:var(--blue-400)}
+.top-mark .t1{font-family:var(--disp);font-size:.95rem;font-weight:700;letter-spacing:.04em}
+.top-mark .t2{font-size:.56rem;letter-spacing:.2em;color:var(--blue-400);font-weight:700}
+.top-sp{flex:1;min-width:0}
+
+/* ---------- stats ---------- */
+main{flex:1;padding:1.4rem 0 3rem}
+.stats{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:1rem}
+.stat{border-radius:var(--r-md);padding:1.1rem 1.2rem;background:var(--grad-soft);
+  border:1px solid var(--line-blue);box-shadow:inset 0 1px 0 rgba(147,197,253,.16)}
+.stat .k{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);font-weight:700}
+.stat .v{font-family:var(--disp);font-size:clamp(1.6rem,5vw,2.1rem);font-weight:700;line-height:1.1;margin-top:.3rem}
+.stat.g{background:linear-gradient(135deg,rgba(52,211,153,.18),rgba(52,211,153,.04));border-color:rgba(52,211,153,.3)}
+.stat.g .v{color:#6EE7B7}
+
+/* ---------- filtros ---------- */
+.bar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+.search{position:relative;flex:1;min-width:200px}
+.search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--ink-mute);pointer-events:none}
+.search input{width:100%;padding:.78rem 1rem .78rem 2.7rem;border-radius:999px;background:rgba(255,255,255,.055);
+  border:1px solid var(--line);color:var(--ink);font-family:var(--sans);font-size:.95rem}
+.search input:focus{outline:none;border-color:var(--blue-500);background:rgba(255,255,255,.085);box-shadow:0 0 0 3px rgba(59,130,246,.18)}
+.seg{display:flex;gap:.3rem;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:999px;padding:.25rem}
+.seg button{padding:.5rem 1rem;border-radius:999px;border:0;background:none;cursor:pointer;
+  font-size:.82rem;font-weight:600;color:var(--ink-mute);transition:background .22s,color .22s}
+.seg button[aria-pressed="true"]{background:var(--grad);color:#06121F}
+
+/* ---------- lista ---------- */
+.list{display:flex;flex-direction:column;gap:.55rem}
+.item{display:flex;align-items:center;gap:.9rem;padding:.95rem 1.1rem;border-radius:var(--r-md);
+  background:var(--glass);border:1px solid var(--line);transition:border-color .22s}
+.item:hover{border-color:var(--line-blue)}
+.item.in{border-color:rgba(52,211,153,.32);background:linear-gradient(135deg,rgba(52,211,153,.09),rgba(255,255,255,.03))}
+.av{width:42px;height:42px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;
+  font-family:var(--disp);font-size:.9rem;font-weight:700;color:#06121F;background:var(--grad)}
+.item.in .av{background:linear-gradient(135deg,#6EE7B7,#34D399)}
+.it{flex:1;min-width:0}
+.it .n{font-weight:600;font-size:.95rem;line-height:1.3;word-break:break-word}
+.it .m{font-size:.8rem;color:var(--ink-mute);margin-top:.12rem;word-break:break-word}
+.it .m b{color:var(--blue-300);font-weight:600;font-family:var(--disp);letter-spacing:.04em}
+.ia{display:flex;align-items:center;gap:.45rem;flex-shrink:0}
+.pill{padding:.28rem .6rem;border-radius:999px;font-size:.68rem;font-weight:700;
+  background:rgba(255,255,255,.07);border:1px solid var(--line);white-space:nowrap}
+.icon-a{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;cursor:pointer;
+  background:var(--glass);border:1px solid var(--line);color:var(--ink-soft);padding:0;transition:all .2s;text-decoration:none}
+.icon-a:hover{border-color:var(--line-blue);color:#fff}
+.icon-a svg{width:17px;height:17px}
+@media (max-width:620px){
+  .item{flex-wrap:wrap}
+  .ia{width:100%;justify-content:flex-end;border-top:1px solid var(--line);padding-top:.65rem;margin-top:.1rem}
+}
+
+.empty{text-align:center;padding:3rem 1.2rem;color:var(--ink-mute)}
+.empty h4{font-size:1.1rem;color:var(--ink);margin-bottom:.4rem}
+.empty p{margin:0;font-size:.88rem}
+
+.toast{position:fixed;left:50%;bottom:1.4rem;transform:translate(-50%,16px);z-index:400;
+  padding:.78rem 1.2rem;border-radius:999px;font-size:.85rem;font-weight:600;
+  background:rgba(11,19,34,.95);border:1px solid var(--line-blue);color:var(--blue-200);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 18px 44px -18px rgba(0,0,0,.9);
+  opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility .3s;max-width:min(92vw,420px);text-align:center}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+.spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;
+  animation:sp .7s linear infinite;display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.hide{display:none !important}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <!-- ===================== LOGIN ===================== -->
+  <div class="login" id="login">
+    <div class="login-box">
+      <div class="login-mark">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M14 10h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+          <path d="M26 22h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+        </svg>
+        <span class="t"><span class="t1">GED<span style="color:var(--blue-400);margin:0 .18em">|</span>NEXO</span><span class="t2">VARGINHA</span></span>
+      </div>
+      <div class="card">
+        <h1>Painel da organização</h1>
+        <p class="sub">Confirmações do evento de 18 de novembro</p>
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="l-mail">E-mail</label>
+            <input id="l-mail" type="email" inputmode="email" autocomplete="username" placeholder="seu@email.com" required>
+          </div>
+          <div class="field">
+            <label for="l-pass">Senha</label>
+            <input id="l-pass" type="password" autocomplete="current-password" placeholder="••••••••" required>
+          </div>
+          <button class="btn btn-pri btn-block" type="submit" id="loginBtn" style="margin-top:.4rem">Entrar</button>
+          <p class="alert err" id="loginErr"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== PAINEL ===================== -->
+  <div class="hide" id="painel" style="display:flex;flex-direction:column;flex:1">
+
+    <header class="top">
+      <div class="inner top-row">
+        <span class="top-mark">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M14 10h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+            <path d="M26 22h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z" stroke="currentColor" stroke-width="3.4"/>
+          </svg>
+          <span><span class="t1" style="display:block">Painel do evento</span><span class="t2">GED NEXO VARGINHA</span></span>
+        </span>
+        <span class="top-sp"></span>
+        <button class="btn btn-ghost btn-sm" id="btnRefresh">Atualizar</button>
+        <button class="btn btn-ghost btn-sm" id="btnCsv">Exportar CSV</button>
+        <button class="btn btn-ghost btn-sm" id="btnOut">Sair</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="inner">
+
+        <div class="stats">
+          <div class="stat"><div class="k">Inscrições</div><div class="v" id="sInsc">—</div></div>
+          <div class="stat"><div class="k">Pessoas esperadas</div><div class="v" id="sPess">—</div></div>
+          <div class="stat g"><div class="k">Check-in feito</div><div class="v" id="sChk">—</div></div>
+          <div class="stat"><div class="k">Última inscrição</div><div class="v" id="sUlt" style="font-size:1.05rem">—</div></div>
+        </div>
+
+        <div class="bar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+            <input id="q" type="search" placeholder="Buscar por nome, empresa, telefone ou código…" autocomplete="off">
+          </label>
+          <div class="seg" role="group" aria-label="Filtrar">
+            <button type="button" data-f="todos"     aria-pressed="true">Todos</button>
+            <button type="button" data-f="pendentes" aria-pressed="false">A chegar</button>
+            <button type="button" data-f="chegaram"  aria-pressed="false">Chegaram</button>
+          </div>
+        </div>
+
+        <div class="list" id="lista"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var SB = {
+    url: "https://divopnirxrjtvbwwrqgu.supabase.co",
+    key: "sb_publishable_3PcXXLW5N-eWFJFFG-2xrw_PqhOV4ro"
+  };
+
+  var $  = function(s,c){ return (c||document).querySelector(s); };
+  var $$ = function(s,c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+  var esc = function(v){ return String(v==null?"":v).replace(/[&<>"'`=\/]/g, function(m){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","`":"&#96;","=":"&#61;","/":"&#47;"}[m]; }); };
+
+  var TOKEN_KEY = "gednexo.admin.token";
+  var token = null;
+  try{ token = sessionStorage.getItem(TOKEN_KEY); }catch(e){}
+
+  var dados = [], filtro = "todos", busca = "";
+
+  /* ---------- toast ---------- */
+  var toastEl = $("#toast"), tT;
+  function toast(t){
+    toastEl.textContent = t; toastEl.classList.add("show");
+    clearTimeout(tT); tT = setTimeout(function(){ toastEl.classList.remove("show"); }, 3000);
+  }
+
+  /* ---------- api ---------- */
+  function api(path, opts){
+    opts = opts || {};
+    var h = { "apikey": SB.key, "Content-Type": "application/json" };
+    if(token) h["Authorization"] = "Bearer " + token;
+    if(opts.headers) for(var k in opts.headers) h[k] = opts.headers[k];
+    return fetch(SB.url + path, { method: opts.method || "GET", headers: h, body: opts.body });
+  }
+
+  /* ---------- login ---------- */
+  var loginForm = $("#loginForm"), loginBtn = $("#loginBtn"), loginErr = $("#loginErr");
+
+  function erroLogin(msg){
+    loginErr.textContent = msg; loginErr.classList.add("show");
+  }
+
+  loginForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    loginErr.classList.remove("show");
+    var email = $("#l-mail").value.trim(), pass = $("#l-pass").value;
+    if(!email || !pass){ erroLogin("Preencha e-mail e senha."); return; }
+
+    loginBtn.disabled = true; loginBtn.innerHTML = '<span class="spin"></span> Entrando…';
+
+    fetch(SB.url + "/auth/v1/token?grant_type=password", {
+      method : "POST",
+      headers: { "apikey": SB.key, "Content-Type": "application/json" },
+      body   : JSON.stringify({ email: email, password: pass })
+    })
+    .then(function(r){ return r.json().then(function(j){ return { ok:r.ok, j:j }; }); })
+    .then(function(res){
+      loginBtn.disabled = false; loginBtn.textContent = "Entrar";
+      if(!res.ok || !res.j.access_token){
+        erroLogin("E-mail ou senha incorretos.");
+        return;
+      }
+      token = res.j.access_token;
+      try{ sessionStorage.setItem(TOKEN_KEY, token); }catch(e){}
+      abrirPainel();
+    })
+    .catch(function(err){
+      loginBtn.disabled = false; loginBtn.textContent = "Entrar";
+      erroLogin("Não consegui falar com o servidor. Verifique a conexão.");
+    });
+  });
+
+  function sair(){
+    token = null;
+    try{ sessionStorage.removeItem(TOKEN_KEY); }catch(e){}
+    $("#painel").classList.add("hide");
+    $("#login").style.display = "grid";
+    $("#l-pass").value = "";
+  }
+  $("#btnOut").addEventListener("click", sair);
+
+  /* ---------- carregar ---------- */
+  function abrirPainel(){
+    $("#login").style.display = "none";
+    $("#painel").classList.remove("hide");
+    carregar();
+  }
+
+  function carregar(){
+    return api("/rest/v1/inscricoes?select=*&order=criado_em.desc")
+      .then(function(r){
+        if(r.status === 401 || r.status === 403){
+          toast("Sessão expirada. Entre novamente."); sair(); return null;
+        }
+        if(!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function(j){
+        if(!j) return;
+        dados = j;
+        render();
+      })
+      .catch(function(){ toast("Não consegui carregar a lista."); });
+  }
+
+  $("#btnRefresh").addEventListener("click", function(){
+    var b = this; b.disabled = true;
+    carregar().then(function(){ b.disabled = false; toast("Lista atualizada."); });
+  });
+
+  /* ---------- filtros ---------- */
+  $("#q").addEventListener("input", function(){ busca = this.value.toLowerCase().trim(); render(); });
+  $$(".seg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      filtro = b.dataset.f;
+      $$(".seg button").forEach(function(o){ o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+      render();
+    });
+  });
+
+  function visiveis(){
+    return dados.filter(function(d){
+      if(filtro === "pendentes" && d.check_in_em) return false;
+      if(filtro === "chegaram"  && !d.check_in_em) return false;
+      if(!busca) return true;
+      return [d.nome, d.empresa, d.cargo, d.whatsapp, d.email, d.codigo]
+        .join(" ").toLowerCase().indexOf(busca) !== -1;
+    });
+  }
+
+  function nPessoas(v){
+    var n = parseInt(String(v||"1"), 10);
+    return isNaN(n) ? 1 : n;   // "5+" vira 5
+  }
+
+  /* ---------- render ---------- */
+  function render(){
+    var totalPess = dados.reduce(function(a,d){ return a + nPessoas(d.pessoas); }, 0);
+    var chk = dados.filter(function(d){ return !!d.check_in_em; }).length;
+
+    $("#sInsc").textContent = dados.length;
+    $("#sPess").textContent = totalPess;
+    $("#sChk").textContent  = chk + " / " + dados.length;
+
+    if(dados.length){
+      var u = dados[0].criado_em ? new Date(dados[0].criado_em) : null;
+      $("#sUlt").textContent = u
+        ? u.toLocaleString("pt-BR", { day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit" })
+        : "—";
+    }else{
+      $("#sUlt").textContent = "—";
+    }
+
+    var lista = visiveis(), box = $("#lista");
+
+    if(!lista.length){
+      box.innerHTML = '<div class="card empty"><h4>'+
+        (dados.length ? "Nada encontrado" : "Nenhuma inscrição ainda")+'</h4><p>'+
+        (dados.length ? "Tente outro termo ou mude o filtro." : "As confirmações aparecem aqui assim que chegarem.")+
+        '</p></div>';
+      return;
+    }
+
+    box.innerHTML = lista.map(function(d){
+      var ini = String(d.nome||"?").trim().split(/\s+/).slice(0,2).map(function(w){ return w[0]; }).join("").toUpperCase();
+      var meta = [];
+      if(d.empresa) meta.push(esc(d.empresa) + (d.cargo ? " · " + esc(d.cargo) : ""));
+      if(d.whatsapp) meta.push(esc(d.whatsapp));
+      var wpp = String(d.whatsapp||"").replace(/\D/g,"");
+      if(wpp.length >= 10 && wpp.indexOf("55") !== 0) wpp = "55" + wpp;
+
+      return '<div class="item'+(d.check_in_em ? " in" : "")+'" data-id="'+esc(d.id)+'">'+
+        '<span class="av">'+esc(ini)+'</span>'+
+        '<span class="it">'+
+          '<span class="n">'+esc(d.nome)+'</span>'+
+          '<span class="m">'+meta.join(" — ")+' · <b>'+esc(d.codigo)+'</b></span>'+
+          (d.observacao ? '<span class="m" style="color:var(--warn)">obs: '+esc(d.observacao)+'</span>' : '')+
+        '</span>'+
+        '<span class="ia">'+
+          '<span class="pill">'+nPessoas(d.pessoas)+(nPessoas(d.pessoas) > 1 ? " pessoas" : " pessoa")+'</span>'+
+          (wpp ? '<a class="icon-a" href="https://wa.me/'+wpp+'" target="_blank" rel="noopener" title="Chamar no WhatsApp" aria-label="Chamar no WhatsApp">'+
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.2-.6L3 21l1.8-5a8.3 8.3 0 0 1-.8-3.6A8.4 8.4 0 0 1 12.5 4 8.4 8.4 0 0 1 21 11.5Z"/></svg></a>' : '')+
+          '<button class="btn '+(d.check_in_em ? "btn-ghost" : "btn-pri")+' btn-sm" data-chk="'+esc(d.id)+'">'+
+            (d.check_in_em ? "Desfazer" : "Check-in")+'</button>'+
+        '</span>'+
+      '</div>';
+    }).join("");
+
+    $$("[data-chk]", box).forEach(function(b){
+      b.addEventListener("click", function(){ checkin(b.dataset.chk, b); });
+    });
+  }
+
+  /* ---------- check-in ---------- */
+  function checkin(id, btn){
+    var reg = dados.filter(function(d){ return d.id === id; })[0];
+    if(!reg) return;
+    var novo = reg.check_in_em ? null : new Date().toISOString();
+
+    btn.disabled = true;
+    api("/rest/v1/inscricoes?id=eq." + encodeURIComponent(id), {
+      method : "PATCH",
+      headers: { "Prefer": "return=representation" },
+      body   : JSON.stringify({ check_in_em: novo })
+    })
+    .then(function(r){
+      if(r.status === 401 || r.status === 403){ toast("Sessão expirada."); sair(); return; }
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      reg.check_in_em = novo;
+      render();
+      toast(novo ? "Check-in de " + reg.nome.split(" ")[0] + " registrado." : "Check-in desfeito.");
+    })
+    .catch(function(){ btn.disabled = false; toast("Não consegui salvar o check-in."); });
+  }
+
+  /* ---------- CSV ---------- */
+  $("#btnCsv").addEventListener("click", function(){
+    if(!dados.length){ toast("Nada para exportar ainda."); return; }
+
+    var cols = ["codigo","nome","empresa","cargo","whatsapp","email","pessoas","observacao","check_in_em","criado_em"];
+    var cel  = function(v){ return '"' + String(v==null?"":v).replace(/"/g,'""') + '"'; };
+    var csv  = "﻿" + cols.join(";") + "\n" +
+      dados.map(function(d){ return cols.map(function(c){ return cel(d[c]); }).join(";"); }).join("\n");
+
+    try{
+      var blob = new Blob([csv], { type:"text/csv;charset=utf-8;" });
+      var url  = URL.createObjectURL(blob);
+      var a    = document.createElement("a");
+      a.href = url;
+      a.download = "inscricoes-gednexo-" + new Date().toISOString().slice(0,10) + ".csv";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+      toast("CSV gerado.");
+    }catch(e){
+      if(navigator.clipboard) navigator.clipboard.writeText(csv).then(function(){ toast("CSV copiado para a área de transferência."); });
+      else toast("Não consegui gerar o arquivo aqui.");
+    }
+  });
+
+  /* ---------- expira sessão ociosa (30 min) ---------- */
+  var ultimoUso = Date.now();
+  ["click","keydown","touchstart"].forEach(function(ev){
+    document.addEventListener(ev, function(){ ultimoUso = Date.now(); }, { passive:true });
+  });
+  setInterval(function(){
+    if(token && Date.now() - ultimoUso > 30*60*1000){
+      sair(); toast("Sessão encerrada por inatividade.");
+    }
+  }, 60000);
+
+  /* ---------- auto refresh ---------- */
+  setInterval(function(){
+    if(token && !document.hidden && !$("#painel").classList.contains("hide")) carregar();
+  }, 30000);
+
+  /* ---------- start ---------- */
+  if(token) abrirPainel();
+
+})();
+</script>
+</body>
+</html>
