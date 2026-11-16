@@ -34,6 +34,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%23080D1A'/%3E%3Cg fill='none' stroke='%2360A5FA' stroke-width='3.4'%3E%3Cpath d='M14 10h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z'/%3E%3Cpath d='M26 22h8a8 8 0 0 1 0 16h-8a8 8 0 0 1 0-16Z'/%3E%3C/g%3E%3C/svg%3E">
+<script src="qr.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -331,13 +332,16 @@ h1,h2,h3,h4{margin:0;line-height:1.14;font-weight:600;font-family:var(--disp)}
 .pass-perf i{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--line) 0 7px,transparent 7px 14px)}
 .pass-perf b{width:16px;height:16px;border-radius:50%;background:var(--bg-950);flex-shrink:0}
 .pass-code{display:flex;align-items:center;gap:1rem}
-.pass-sigil{display:grid;grid-template-columns:repeat(5,1fr);gap:2.5px;width:56px;height:56px;flex-shrink:0;
-  padding:5px;border-radius:12px;background:rgba(5,8,15,.6);border:1px solid var(--line)}
-.pass-sigil i{border-radius:2px;background:rgba(255,255,255,.07)}
-.pass-sigil i.on{background:var(--blue-400)}
 .pass-ct{min-width:0}
 .pass-ct span{display:block;font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);font-weight:700}
 .pass-ct strong{display:block;font-family:var(--disp);font-size:clamp(1.05rem,4.4vw,1.3rem);font-weight:700;letter-spacing:.1em;margin-top:.18rem}
+
+.pass-qr{display:flex;align-items:center;gap:1rem}
+.qr-box{width:104px;height:104px;flex-shrink:0;padding:7px;border-radius:14px;background:#fff;
+  box-shadow:0 8px 22px -10px rgba(0,0,0,.7)}
+.qr-box svg{width:100%;height:100%;display:block}
+.qr-falhou{font-size:.6rem;color:#06121F;text-align:center;padding:.4rem;line-height:1.3;font-weight:600}
+@media (max-width:360px){.qr-box{width:88px;height:88px}}
 
 /* empty */
 .empty{text-align:center;padding:clamp(1.8rem,8vw,3rem) 1.2rem}
@@ -896,17 +900,11 @@ h1,h2,h3,h4{margin:0;line-height:1.14;font-weight:600;font-family:var(--disp)}
   });
 
   /* ---------- credencial ---------- */
-  function sigil(code){
-    var s = 0;
-    for(var i=0;i<code.length;i++){ s = (s*33 + code.charCodeAt(i)) >>> 0; }
-    var out = "";
-    for(var r=0;r<5;r++){
-      for(var c=0;c<5;c++){
-        var m = c > 2 ? 4 - c : c;
-        out += '<i class="'+(((s >>> ((r*3 + m) % 30)) & 1) ? "on" : "")+'"></i>';
-      }
-    }
-    return out;
+  function qrSvg(codigo){
+    try{
+      if (window.QR && window.QR.svg) return window.QR.svg(codigo, { quiet: 2 });
+    }catch(e){}
+    return '<div class="qr-falhou">Mostre o código abaixo na recepção</div>';
   }
 
   function renderCred(){
@@ -931,9 +929,9 @@ h1,h2,h3,h4{margin:0;line-height:1.14;font-weight:600;font-family:var(--disp)}
             '<div class="pass-cell"><b>'+esc(state.qtd)+'</b><span>Pessoas</span></div>'+
           '</div>'+
           '<div class="pass-perf" aria-hidden="true"><b></b><i></i><b></b></div>'+
-          '<div class="pass-code">'+
-            '<span class="pass-sigil" aria-hidden="true">'+sigil(state.code)+'</span>'+
-            '<span class="pass-ct"><span>Código de entrada</span><strong>'+esc(state.code)+'</strong></span>'+
+          '<div class="pass-qr">'+
+            '<div class="qr-box">'+qrSvg(state.code)+'</div>'+
+            '<div class="pass-ct"><span>Código de entrada</span><strong>'+esc(state.code)+'</strong></div>'+
           '</div>'+
         '</div>'+
         (state.sincronizado === false
