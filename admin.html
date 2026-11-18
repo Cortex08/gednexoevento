@@ -98,6 +98,7 @@ h1,h2,h3,h4{margin:0;font-family:var(--disp);font-weight:600;line-height:1.15}
 .chip-eu{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .7rem;border-radius:999px;
   background:var(--grad-soft);border:1px solid var(--line-blue);font-size:.72rem;font-weight:600;max-width:46vw}
 .chip-eu b{font-weight:700;color:var(--blue-300);text-transform:uppercase;font-size:.6rem;letter-spacing:.08em}
+.it .n,.it .m{display:block}
 .chip-eu span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 .abas{display:flex;gap:.2rem;margin-top:.7rem;overflow-x:auto}
@@ -142,8 +143,8 @@ main{flex:1;padding:1.4rem 0 3rem}
   font-family:var(--disp);font-size:.9rem;font-weight:700;color:#06121F;background:var(--grad)}
 .item.in .av{background:linear-gradient(135deg,#6EE7B7,#34D399)}
 .it{flex:1;min-width:0}
-.it .n{font-weight:600;font-size:.95rem;line-height:1.3;word-break:break-word}
-.it .m{font-size:.8rem;color:var(--ink-mute);margin-top:.12rem;word-break:break-word}
+.it .n{display:block;font-weight:600;font-size:.95rem;line-height:1.3;word-break:break-word}
+.it .m{display:block;font-size:.8rem;color:var(--ink-mute);margin-top:.12rem;word-break:break-word}
 .it .m b{color:var(--blue-300);font-weight:600;font-family:var(--disp);letter-spacing:.04em}
 .ia{display:flex;align-items:center;gap:.45rem;flex-shrink:0}
 .pill{padding:.28rem .6rem;border-radius:999px;font-size:.68rem;font-weight:700;
@@ -284,7 +285,8 @@ main{flex:1;padding:1.4rem 0 3rem}
             <div class="stat"><div class="k">Inscrições</div><div class="v" id="sInsc">—</div></div>
             <div class="stat"><div class="k">Pessoas esperadas</div><div class="v" id="sPess">—</div></div>
             <div class="stat g"><div class="k">Já chegaram</div><div class="v" id="sChk">—</div></div>
-            <div class="stat"><div class="k">Última inscrição</div><div class="v" id="sUlt" style="font-size:1.02rem">—</div></div>
+            <div class="stat"><div class="k">Última inscrição</div><div class="v" id="sUlt" style="font-size:1.02rem">—</div>
+              <div class="k" id="sSync" style="margin-top:.45rem;letter-spacing:.06em;text-transform:none">—</div></div>
           </div>
           <div class="bar">
             <label class="search">
@@ -585,8 +587,18 @@ main{flex:1;padding:1.4rem 0 3rem}
         if(!r.ok) throw new Error("HTTP " + r.status);
         return r.json();
       })
-      .then(function(j){ if(j){ dados = j; render(); } })
-      .catch(function(){ toast("Não consegui carregar a lista."); });
+      .then(function(j){
+        if(j){
+          dados = j; render();
+          $("#sSync").textContent = "atualizado " +
+            new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+          $("#sSync").style.color = "";
+        }
+      })
+      .catch(function(){
+        $("#sSync").textContent = "sem conexão — tentando de novo";
+        $("#sSync").style.color = "#FCA5A5";
+      });
   }
 
   $("#btnRefresh").addEventListener("click", function(){
@@ -997,9 +1009,18 @@ main{flex:1;padding:1.4rem 0 3rem}
   setInterval(function(){ if(token) renovarSessao(); }, 40*60*1000);
 
   /* ---------- atualização automática ---------- */
+  function ativo(){ return token && !$("#painel").classList.contains("hide"); }
+
   setInterval(function(){
-    if(token && !document.hidden && !$("#painel").classList.contains("hide")) carregar();
-  }, 30000);
+    if(ativo() && !document.hidden) carregar();
+  }, 15000);
+
+  // ao desbloquear o celular ou voltar para a aba, atualiza na hora
+  document.addEventListener("visibilitychange", function(){
+    if(!document.hidden && ativo()) carregar();
+  });
+  window.addEventListener("focus", function(){ if(ativo()) carregar(); });
+  window.addEventListener("online", function(){ if(ativo()) carregar(); });
 
   if(token) abrirPainel();
 
