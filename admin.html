@@ -418,9 +418,41 @@ main{flex:1;padding:1.4rem 0 3rem}
   var esc = function(v){ return String(v==null?"":v).replace(/[&<>"'`=\/]/g, function(m){
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","`":"&#96;","=":"&#61;","/":"&#47;"}[m]; }); };
 
-  var TOKEN_KEY = "gednexo.admin.token";
-  var token = null;
-  try{ token = sessionStorage.getItem(TOKEN_KEY); }catch(e){}
+  var TOKEN_KEY = "gednexo.admin.token", REFRESH_KEY = "gednexo.admin.refresh";
+  var token = null, refresh = null;
+  try{
+    token   = sessionStorage.getItem(TOKEN_KEY);
+    refresh = sessionStorage.getItem(REFRESH_KEY);
+  }catch(e){}
+
+  function salvarSessao(j){
+    token = j.access_token; refresh = j.refresh_token || refresh;
+    try{
+      sessionStorage.setItem(TOKEN_KEY, token);
+      if(refresh) sessionStorage.setItem(REFRESH_KEY, refresh);
+    }catch(e){}
+  }
+
+  // o token do Supabase vence em cerca de 1 hora; sem isso o painel
+  // pararia no meio do evento
+  var renovando = null;
+  function renovarSessao(){
+    if(!refresh) return Promise.resolve(false);
+    if(renovando) return renovando;
+    renovando = fetch(SB.url + "/auth/v1/token?grant_type=refresh_token", {
+      method:"POST",
+      headers:{ "apikey": SB.key, "Content-Type":"application/json" },
+      body: JSON.stringify({ refresh_token: refresh })
+    })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){
+      renovando = null;
+      if(j && j.access_token){ salvarSessao(j); return true; }
+      return false;
+    })
+    .catch(function(){ renovando = null; return false; });
+    return renovando;
+  }
 
   var dados = [], usuarios = [], eu = null, filtro = "todos", busca = "";
 
@@ -436,12 +468,18 @@ main{flex:1;padding:1.4rem 0 3rem}
   }
 
   /* ---------- api ---------- */
-  function api(path, opts){
+  function api(path, opts, jaRenovou){
     opts = opts || {};
     var h = { "apikey": SB.key, "Content-Type": "application/json" };
     if(token) h["Authorization"] = "Bearer " + token;
     if(opts.headers) for(var k in opts.headers) h[k] = opts.headers[k];
-    return fetch(SB.url + path, { method: opts.method || "GET", headers: h, body: opts.body });
+    return fetch(SB.url + path, { method: opts.method || "GET", headers: h, body: opts.body })
+      .then(function(r){
+        if(r.status === 401 && !jaRenovou){
+          return renovarSessao().then(function(ok){ return ok ? api(path, opts, true) : r; });
+        }
+        return r;
+      });
   }
   function rpc(nome, args){
     return api("/rest/v1/rpc/" + nome, { method:"POST", body: JSON.stringify(args || {}) })
@@ -480,8 +518,7 @@ main{flex:1;padding:1.4rem 0 3rem}
         else erroLogin("E-mail ou senha incorretos.");
         return;
       }
-      token = res.j.access_token;
-      try{ sessionStorage.setItem(TOKEN_KEY, token); }catch(e){}
+      salvarSessao(res.j);
       abrirPainel();
     })
     .catch(function(){
@@ -492,8 +529,8 @@ main{flex:1;padding:1.4rem 0 3rem}
 
   function sair(){
     pararCamera();
-    token = null; eu = null;
-    try{ sessionStorage.removeItem(TOKEN_KEY); }catch(e){}
+    token = null; refresh = null; eu = null;
+    try{ sessionStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(REFRESH_KEY); }catch(e){}
     $("#painel").classList.add("hide");
     $("#login").style.display = "grid";
     $("#l-pass").value = "";
@@ -676,7 +713,30 @@ main{flex:1;padding:1.4rem 0 3rem}
     ultimoCod = cod; ultimoT = agora;
 
     var reg = dados.filter(function(d){ return String(d.codigo).toUpperCase() === cod; })[0];
-    if(!reg){ vibrar([60,60,60]); mostrar("erro", "Código não encontrado", cod, "Confira na lista ou peça o nome da pessoa."); return; }
+
+    if(!reg){
+      // pode ser alguém que se inscreveu agora e ainda não entrou na lista local
+      mostrar("rep", "Procurando…", cod, "Conferindo no servidor");
+      api("/rest/v1/inscricoes?select=*&codigo=eq." + encodeURIComponent(cod))
+        .then(function(r){ return r.ok ? r.json() : []; })
+        .then(function(j){
+          var achado = j && j[0];
+          if(!achado){
+            vibrar([60,60,60]);
+            mostrar("erro", "Código não encontrado", cod, "Confira na lista ou peça o nome da pessoa.");
+            return;
+          }
+          dados.unshift(achado); render();
+          ultimoCod = "";              // deixa reprocessar agora que existe
+          processarCodigo(cod);
+        })
+        .catch(function(){
+          vibrar([60,60,60]);
+          mostrar("erro", "Sem conexão", cod, "Verifique a internet e tente de novo.");
+        });
+      return;
+    }
+
     if(reg.check_in_em){
       vibrar(40);
       mostrar("rep", "Já tinha entrado", reg.nome,
@@ -895,8 +955,11 @@ main{flex:1;padding:1.4rem 0 3rem}
     document.addEventListener(ev, function(){ ultimoUso = Date.now(); }, { passive:true });
   });
   setInterval(function(){
-    if(token && Date.now() - ultimoUso > 30*60*1000){ sair(); toast("Sessão encerrada por inatividade."); }
+    if(token && Date.now() - ultimoUso > 6*60*60*1000){ sair(); toast("Sessão encerrada por inatividade."); }
   }, 60000);
+
+  /* ---------- renova a sessão antes de vencer ---------- */
+  setInterval(function(){ if(token) renovarSessao(); }, 40*60*1000);
 
   /* ---------- atualização automática ---------- */
   setInterval(function(){
