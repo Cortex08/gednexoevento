@@ -164,6 +164,12 @@ main{flex:1;padding:1.4rem 0 3rem}
 .empty h4{font-size:1.1rem;color:var(--ink);margin-bottom:.4rem}
 .empty p{margin:0;font-size:.88rem}
 
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{padding:.6rem 1.05rem;border-radius:999px;cursor:pointer;font-size:.9rem;font-weight:600;font-family:inherit;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--ink-soft);transition:all .2s}
+.chip:hover{border-color:var(--line-blue);color:#fff}
+.chip[aria-pressed="true"]{background:var(--grad);border-color:transparent;color:#06121F}
+
 /* ---------- leitor ---------- */
 .scan-wrap{position:relative;border-radius:var(--r-md);overflow:hidden;background:#000;
   aspect-ratio:4/3;max-height:58vh;border:1px solid var(--line-blue);display:grid;place-items:center}
@@ -313,6 +319,33 @@ main{flex:1;padding:1.4rem 0 3rem}
               <button class="btn btn-pri" type="submit">Confirmar</button>
             </form>
             <p class="aviso">Serve quando a câmera não estiver disponível — o código também aparece escrito na credencial do convidado.</p>
+          </div>
+
+          <div class="card hide" id="cardPortaria">
+            <h4 style="font-size:.98rem;margin-bottom:.3rem">Chegou sem inscrição</h4>
+            <p class="aviso" style="margin:0 0 1rem">Cadastra e libera a entrada de uma vez só.</p>
+            <form id="formPortaria">
+              <div class="grid2">
+                <div class="field"><label for="p-nome">Nome *</label>
+                  <input id="p-nome" type="text" maxlength="120" placeholder="Nome completo" autocomplete="off" required></div>
+                <div class="field"><label for="p-empresa">Empresa</label>
+                  <input id="p-empresa" type="text" maxlength="120" placeholder="Opcional" autocomplete="off"></div>
+              </div>
+              <div class="field"><label for="p-whats">WhatsApp (opcional)</label>
+                <input id="p-whats" type="tel" inputmode="tel" maxlength="16" placeholder="(11) 99999-9999" autocomplete="off"></div>
+              <div class="field">
+                <label>Quantas pessoas</label>
+                <div class="chips" id="pQtd" role="group" aria-label="Número de pessoas">
+                  <button class="chip" type="button" aria-pressed="true"  data-q="1">1</button>
+                  <button class="chip" type="button" aria-pressed="false" data-q="2">2</button>
+                  <button class="chip" type="button" aria-pressed="false" data-q="3">3</button>
+                  <button class="chip" type="button" aria-pressed="false" data-q="4">4</button>
+                  <button class="chip" type="button" aria-pressed="false" data-q="5+">5+</button>
+                </div>
+              </div>
+              <button class="btn btn-pri btn-block" type="submit" id="btnPortaria">Cadastrar e liberar entrada</button>
+              <p class="alert" id="portariaMsg"></p>
+            </form>
           </div>
         </section>
 
@@ -494,6 +527,7 @@ main{flex:1;padding:1.4rem 0 3rem}
         var nomes = { admin:"Admin", recepcao:"Recepção", midia:"Mídia" };
         $("#chipEu").innerHTML = '<b>'+esc(nomes[eu.papel] || eu.papel)+'</b><span>'+esc(eu.nome || eu.email)+'</span>';
         $("#abaEquipe").classList.toggle("hide", eu.papel !== "admin");
+        $("#cardPortaria").classList.toggle("hide", !podeCheckin());
       })
       .catch(function(){});
   }
@@ -729,6 +763,61 @@ main{flex:1;padding:1.4rem 0 3rem}
     ultimoCod = "";            // digitar sempre vale, mesmo repetido
     processarCodigo(v);
     $("#codManual").value = "";
+  });
+
+  /* ---------- cadastro na portaria ---------- */
+  var pQtd = "1";
+  $$("#pQtd .chip").forEach(function(c){
+    c.addEventListener("click", function(){
+      pQtd = c.dataset.q;
+      $$("#pQtd .chip").forEach(function(o){ o.setAttribute("aria-pressed", o === c ? "true" : "false"); });
+    });
+  });
+
+  $("#p-whats").addEventListener("input", function(){
+    var d = this.value.replace(/\D/g,"").slice(0,11);
+    this.value = !d ? "" :
+      d.length <= 2  ? "(" + d :
+      d.length <= 6  ? "(" + d.slice(0,2) + ") " + d.slice(2) :
+      d.length <= 10 ? "(" + d.slice(0,2) + ") " + d.slice(2,6) + "-" + d.slice(6)
+                     : "(" + d.slice(0,2) + ") " + d.slice(2,7) + "-" + d.slice(7);
+  });
+
+  $("#formPortaria").addEventListener("submit", function(e){
+    e.preventDefault();
+    var msg = $("#portariaMsg"), btn = $("#btnPortaria");
+    var nome = $("#p-nome").value.trim();
+    var fone = $("#p-whats").value.trim();
+    var dig  = fone.replace(/\D/g,"");
+
+    if(nome.length < 2){ aviso(msg, "Informe o nome.", false); $("#p-nome").focus(); return; }
+    if(dig && (dig.length < 10 || dig.length > 13)){
+      aviso(msg, "WhatsApp incompleto. Preencha com DDD ou deixe em branco.", false); $("#p-whats").focus(); return;
+    }
+
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Cadastrando…';
+    rpc("registrar_presencial", {
+      p_nome: nome, p_whatsapp: fone || null,
+      p_empresa: $("#p-empresa").value.trim() || null, p_pessoas: pQtd
+    }).then(function(r){
+      btn.disabled = false; btn.textContent = "Cadastrar e liberar entrada";
+      if(!r.ok){ aviso(msg, r.erro, false); return; }
+
+      var cod = (r.dado && r.dado.codigo) || "";
+      var repetido = !!(r.dado && r.dado.ja_tinha_entrado);
+      msg.className = "alert";
+      vibrar(120);
+      mostrar(repetido ? "rep" : "ok",
+              repetido ? "Já tinha entrado" : "Entrada liberada",
+              nome,
+              (repetido ? "Cadastro atualizado. " : "") + "Credencial " + cod);
+      $("#formPortaria").reset();
+      pQtd = "1";
+      $$("#pQtd .chip").forEach(function(o){ o.setAttribute("aria-pressed", o.dataset.q === "1" ? "true" : "false"); });
+      $("#p-nome").focus();
+      carregar();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   });
 
   /* ============================================================
