@@ -270,6 +270,7 @@ main{flex:1;padding:1.4rem 0 3rem}
         <nav class="abas" role="tablist">
           <button class="aba" role="tab" aria-selected="true"  data-v="lista">Confirmados<span class="n" id="nLista">0</span></button>
           <button class="aba" role="tab" aria-selected="false" data-v="scan">Check-in</button>
+          <button class="aba hide" role="tab" aria-selected="false" data-v="sorteio" id="abaSorteio">Sorteio</button>
           <button class="aba hide" role="tab" aria-selected="false" data-v="equipe" id="abaEquipe">Equipe</button>
           <button class="aba" role="tab" aria-selected="false" data-v="conta">Minha conta</button>
         </nav>
@@ -357,6 +358,50 @@ main{flex:1;padding:1.4rem 0 3rem}
               <button class="btn btn-pri btn-block" type="submit" id="btnPortaria">Cadastrar e liberar entrada</button>
               <p class="alert" id="portariaMsg"></p>
             </form>
+          </div>
+        </section>
+
+        <!-- ---------- SORTEIO ---------- -->
+        <section class="vista" id="v-sorteio">
+          <div class="card">
+            <h4 style="font-size:.98rem;margin-bottom:.3rem">Tela de projeção</h4>
+            <p class="aviso" style="margin:0 0 .9rem">Abra este endereço no notebook ligado ao telão. Ele não pede login.</p>
+            <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+              <a class="btn btn-ghost" id="linkTelao" href="sorteio.html" target="_blank" rel="noopener">Abrir o telão</a>
+              <button class="btn btn-ghost" id="copiarTelao">Copiar o link</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="stats" style="margin-bottom:1rem">
+              <div class="stat"><div class="k">Concorrendo</div><div class="v" id="sElegiveis">—</div></div>
+              <div class="stat g"><div class="k">Já sorteados</div><div class="v" id="sGanhadores">—</div></div>
+            </div>
+            <div class="field">
+              <label>Tempo da contagem</label>
+              <div class="chips" id="segChips" role="group" aria-label="Segundos">
+                <button class="chip" type="button" aria-pressed="false" data-s="5">5s</button>
+                <button class="chip" type="button" aria-pressed="true"  data-s="8">8s</button>
+                <button class="chip" type="button" aria-pressed="false" data-s="12">12s</button>
+                <button class="chip" type="button" aria-pressed="false" data-s="20">20s</button>
+              </div>
+            </div>
+            <button class="btn btn-pri btn-block" id="btnSortear" style="padding:1.1rem;font-size:1rem">Sortear agora</button>
+            <div class="resultado" id="resSorteio"></div>
+            <p class="alert" id="msgSorteio"></p>
+            <div style="display:flex;gap:.6rem;margin-top:.9rem;flex-wrap:wrap">
+              <button class="btn btn-ghost btn-sm" id="btnLimpar" style="flex:1">Limpar o telão</button>
+              <button class="btn btn-bad btn-sm" id="btnZerar" style="flex:1">Zerar sorteados</button>
+            </div>
+            <p class="aviso">
+              Só entra quem <b>já fez check-in</b>. Quem é sorteado sai das próximas rodadas —
+              use “Zerar sorteados” para devolver todo mundo.
+            </p>
+          </div>
+
+          <div class="card">
+            <h4 style="font-size:.98rem;margin-bottom:.9rem">Ganhadores desta noite</h4>
+            <div class="list" id="listaGanhadores"></div>
           </div>
         </section>
 
@@ -554,6 +599,7 @@ main{flex:1;padding:1.4rem 0 3rem}
     $$(".aba").forEach(function(b){ b.setAttribute("aria-selected", b.dataset.v === v ? "true" : "false"); });
     if(v !== "scan") pararCamera();
     if(v === "equipe") carregarUsuarios();
+    if(v === "sorteio") renderSorteio();
     window.scrollTo(0,0);
   }
   $$(".aba").forEach(function(b){ b.addEventListener("click", function(){ irPara(b.dataset.v); }); });
@@ -575,6 +621,7 @@ main{flex:1;padding:1.4rem 0 3rem}
         var nomes = { admin:"Admin", recepcao:"Recepção", midia:"Mídia" };
         $("#chipEu").innerHTML = '<b>'+esc(nomes[eu.papel] || eu.papel)+'</b><span>'+esc(eu.nome || eu.email)+'</span>';
         $("#abaEquipe").classList.toggle("hide", eu.papel !== "admin");
+        $("#abaSorteio").classList.toggle("hide", !podeCheckin());
         $("#cardPortaria").classList.toggle("hide", !podeCheckin());
       })
       .catch(function(){});
@@ -590,6 +637,7 @@ main{flex:1;padding:1.4rem 0 3rem}
       .then(function(j){
         if(j){
           dados = j; render();
+          if($("#v-sorteio").classList.contains("on")) renderSorteio();
           $("#sSync").textContent = "atualizado " +
             new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
           $("#sSync").style.color = "";
@@ -924,6 +972,77 @@ main{flex:1;padding:1.4rem 0 3rem}
       $("#p-nome").focus();
       carregar();
       window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  /* ============================================================
+     SORTEIO
+     ============================================================ */
+  var segSorteio = 8;
+  $$("#segChips .chip").forEach(function(c){
+    c.addEventListener("click", function(){
+      segSorteio = parseInt(c.dataset.s, 10);
+      $$("#segChips .chip").forEach(function(o){ o.setAttribute("aria-pressed", o === c ? "true" : "false"); });
+    });
+  });
+
+  $("#linkTelao").href = location.href.replace(/admin\.html.*$/, "sorteio.html");
+  $("#copiarTelao").addEventListener("click", function(){
+    var u = $("#linkTelao").href;
+    if(navigator.clipboard) navigator.clipboard.writeText(u).then(
+      function(){ toast("Link copiado: " + u); }, function(){ toast(u); });
+    else toast(u);
+  });
+
+  function renderSorteio(){
+    var presentes = dados.filter(function(d){ return d.check_in_em; });
+    var ganhou    = dados.filter(function(d){ return d.sorteado_em; });
+    $("#sElegiveis").textContent  = presentes.filter(function(d){ return !d.sorteado_em; }).length;
+    $("#sGanhadores").textContent = ganhou.length;
+
+    var box = $("#listaGanhadores");
+    if(!ganhou.length){ box.innerHTML = '<div class="empty"><p>Ninguém sorteado ainda.</p></div>'; return; }
+    ganhou.sort(function(a,b){ return new Date(b.sorteado_em) - new Date(a.sorteado_em); });
+    box.innerHTML = ganhou.map(function(d, i){
+      var ini = String(d.nome||"?").trim().split(/\s+/).slice(0,2).map(function(w){ return w[0]; }).join("").toUpperCase();
+      return '<div class="item in"><span class="av">'+esc(ini)+'</span>'+
+        '<span class="it"><span class="n">'+esc(d.nome)+'</span>'+
+        '<span class="m">'+esc(d.empresa || "—")+' · '+
+        new Date(d.sorteado_em).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})+'</span></span>'+
+        '<span class="ia"><span class="pill '+(i===0?"rec":"")+'">'+(i===0?"último":"#"+(ganhou.length-i))+'</span></span></div>';
+    }).join("");
+  }
+
+  $("#btnSortear").addEventListener("click", function(){
+    var btn = this, msg = $("#msgSorteio");
+    msg.className = "alert";
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Sorteando…';
+    rpc("sortear", { p_segundos: segSorteio }).then(function(r){
+      btn.disabled = false; btn.textContent = "Sortear agora";
+      if(!r.ok){ aviso(msg, r.erro, false); return; }
+      var d = r.dado || {};
+      var cx = $("#resSorteio");
+      cx.className = "resultado on ok";
+      cx.innerHTML = '<div class="rt">Saiu no telão</div><div class="rn">'+esc(d.nome)+'</div>'+
+                     '<div class="rm">'+esc(d.empresa || "")+'</div>';
+      vibrar(150);
+      carregar().then(renderSorteio);
+    });
+  });
+
+  $("#btnLimpar").addEventListener("click", function(){
+    rpc("sorteio_limpar", { p_devolver: false }).then(function(r){
+      if(r.ok){ $("#resSorteio").className = "resultado"; toast("Telão limpo."); }
+      else toast(r.erro);
+    });
+  });
+
+  $("#btnZerar").addEventListener("click", function(){
+    if(!window.confirm("Devolver TODOS os sorteados para as próximas rodadas?")) return;
+    rpc("sorteio_limpar", { p_devolver: true }).then(function(r){
+      if(r.ok){ $("#resSorteio").className = "resultado"; toast("Todos voltaram ao sorteio.");
+                carregar().then(renderSorteio); }
+      else toast(r.erro);
     });
   });
 
